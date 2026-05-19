@@ -1105,9 +1105,99 @@
       .nav { padding: 0 20px; }
       .wa-btn { bottom: 20px; right: 20px; width: 52px; height: 52px; }
     }
+
+    /* ================================================================
+       Age Gate
+    ================================================================ */
+    .age-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(250, 247, 242, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .age-gate.hidden { display: none; }
+
+    .age-gate-box {
+      background: #FAF7F2;
+      border-radius: 20px;
+      padding: 52px 48px 44px;
+      max-width: 440px;
+      width: calc(100% - 48px);
+      text-align: center;
+    }
+
+    .age-gate-brand {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #2D5C3F;
+      margin-bottom: 22px;
+    }
+
+    .age-gate-title {
+      font-size: clamp(1.5rem, 3vw, 1.85rem);
+      font-weight: 800;
+      color: #1C2B1E;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .age-gate-sub {
+      font-size: 0.94rem;
+      color: #6B7C72;
+      line-height: 1.65;
+      margin: 0 auto 36px;
+      max-width: 320px;
+    }
+
+    .age-gate-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .age-gate-actions .btn { width: 100%; justify-content: center; }
+
+    .age-gate-legal {
+      font-size: 0.7rem;
+      color: #AABAA8;
+      line-height: 1.55;
+    }
+
+    .age-gate-denied {
+      font-size: 1rem;
+      color: #6B7C72;
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Age Verification Gate -->
+  <div class="age-gate" id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+    <div class="age-gate-box">
+      <p class="age-gate-brand">NIJ &amp; BIJ</p>
+      <div id="age-gate-check">
+        <h2 class="age-gate-title" id="age-gate-title">Welcome to NIJ &amp; BIJ</h2>
+        <p class="age-gate-sub">Our products contain alcohol. Please confirm your age to continue.</p>
+        <div class="age-gate-actions">
+          <button class="btn btn-primary btn-lg" id="age-gate-yes">Yes, I'm 18 or older</button>
+          <button class="btn btn-ghost btn-lg" id="age-gate-no">No, I'm under 18</button>
+        </div>
+        <p class="age-gate-legal">By entering, you confirm you are of legal drinking age in your country.</p>
+      </div>
+      <div id="age-gate-sorry" style="display:none">
+        <p class="age-gate-denied">Sorry, this site is intended for adults only.</p>
+      </div>
+    </div>
+  </div>
+  <script>if (sessionStorage.getItem('ageVerified')) document.getElementById('age-gate').classList.add('hidden');</script>
 
   <!-- ── Navigation ──────────────────────────────────────────────── -->
   <header class="nav" id="nav" role="banner">
@@ -1583,6 +1673,19 @@
   <script>
     (function () {
       'use strict';
+
+      /* -- Age gate -------------------------------------------- */
+      var ageGate = document.getElementById('age-gate');
+      if (ageGate && !ageGate.classList.contains('hidden')) {
+        document.getElementById('age-gate-yes').addEventListener('click', function () {
+          sessionStorage.setItem('ageVerified', '1');
+          ageGate.classList.add('hidden');
+        });
+        document.getElementById('age-gate-no').addEventListener('click', function () {
+          document.getElementById('age-gate-check').style.display = 'none';
+          document.getElementById('age-gate-sorry').style.display = 'block';
+        });
+      }
 
       /* -- Sticky nav shrink -------------------------------------- */
       const nav = document.getElementById('nav');
