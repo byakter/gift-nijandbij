@@ -1584,13 +1584,13 @@
     (function () {
       'use strict';
 
-      /* ── Sticky nav shrink ────────────────────────────────────── */
+      /* -- Sticky nav shrink -------------------------------------- */
       const nav = document.getElementById('nav');
       window.addEventListener('scroll', () => {
         nav.classList.toggle('shrunk', window.scrollY > 64);
       }, { passive: true });
 
-      /* ── Scroll fade-up animations ───────────────────────────── */
+      /* -- Scroll fade-up animations ----------------------------- */
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           if (e.isIntersecting) {
@@ -1602,7 +1602,7 @@
 
       document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-      /* ── Lead form: Formspree POST ───────────────────────────── */
+      /* -- Lead form: Formspree POST ----------------------------- */
       const form    = document.getElementById('lead-form');
       const success = document.getElementById('form-success');
 
@@ -1610,7 +1610,7 @@
         e.preventDefault();
 
         const btn = form.querySelector('button[type="submit"]');
-        btn.textContent = 'Sending…';
+        btn.textContent = 'Sending...';
         btn.disabled = true;
 
         try {
