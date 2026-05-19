@@ -1601,43 +1601,27 @@
 
       document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-      /* ── Lead form: Formspree POST + WhatsApp open ───────────── */
-      const form    = document.getElementById('lead-form');
-      const success = document.getElementById('form-success');
+      /* ── Lead form: Formspree POST ───────────────────────────── */
+      const form    = document.getElementById(‘lead-form’);
+      const success = document.getElementById(‘form-success’);
 
-      form.addEventListener('submit', async (e) => {
+      form.addEventListener(‘submit’, async (e) => {
         e.preventDefault();
 
-        const btn = form.querySelector('button[type="submit"]');
-        btn.textContent = 'Sending…';
+        const btn = form.querySelector(‘button[type="submit"]’);
+        btn.textContent = ‘Sending…’;
         btn.disabled = true;
 
-        const data = new FormData(form);
-
-        // POST to Formspree (fire and forget)
         try {
           await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
+            method: ‘POST’,
+            body: new FormData(form),
+            headers: { ‘Accept’: ‘application/json’ }
           });
-        } catch (_) { /* silent — WhatsApp still opens */ }
+        } catch (_) {}
 
-        // Open WhatsApp with pre-filled message
-        const phone = '972508989990';
-        const name  = (data.get('name')    || '').trim();
-        const co    = (data.get('company') || '').trim();
-        const qty   = data.get('quantity') || '';
-        const msg   = encodeURIComponent(
-          `Hi! I’m ${name} from ${co}. I’m interested in building a Gift Bank` +
-          (qty && qty !== 'unsure' ? ` (${qty} units)` : '') +
-          ` for my company. Can we talk?`
-        );
-        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-
-        // Show success state
-        form.querySelectorAll('input, select, button').forEach(el => el.style.display = 'none');
-        success.style.display = 'block';
+        form.querySelectorAll(‘input, select, button’).forEach(el => el.style.display = ‘none’);
+        success.style.display = ‘block’;
       });
 
     })();
