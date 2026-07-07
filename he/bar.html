@@ -1102,6 +1102,7 @@
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=207599101277553&ev=PageView&noscript=1"></noscript>
   <!-- End Meta Pixel Code -->
+  <script defer src="../pixel-events.js"></script>
 </head>
 <body>
 
@@ -1648,6 +1649,9 @@
 
         if (typeof gtag === 'function') {
           gtag('event', 'bar_quote_request', {'event_category': 'lead', 'event_label': type});
+        }
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', { content_name: 'Form Submission', content_category: 'Lead' });
         }
       });
 
