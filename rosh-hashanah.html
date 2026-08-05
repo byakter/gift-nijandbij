@@ -365,7 +365,7 @@
 
     .gift-boxes-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
       align-items: start;
     }
@@ -772,16 +772,17 @@
     @media (max-width: 980px) {
       .office-inner { grid-template-columns: 1fr; gap: 48px; }
       .office-img   { max-width: 480px; aspect-ratio: 16/9; }
+      .gift-boxes-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 860px) {
-      .gift-boxes-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
       .trust-grid      { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 640px) {
       .hero-rh-ctas  { flex-direction: column; align-items: center; }
       .hero-rh-ctas .btn { width: 100%; max-width: 340px; justify-content: center; }
+      .gift-boxes-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
       .trust-grid    { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
       .footer-inner  { flex-direction: column; align-items: flex-start; gap: 16px; }
       .footer-contact { flex-direction: column; gap: 8px; align-items: flex-start; }
@@ -915,13 +916,47 @@
         <div class="gift-boxes-header fade-up">
           <span class="section-label-terra">Rosh Hashanah Gift Boxes ✳</span>
           <h2 class="section-title" id="gift-boxes-title">Choose Your Perfect Box</h2>
-          <p class="section-sub">Three boxes, three tiers. Every one arrives beautifully packaged, made with natural ingredients only, and delivered nationwide.</p>
+          <p class="section-sub">Four boxes, four tiers. Every one arrives beautifully packaged, made with natural ingredients only, and delivered nationwide.</p>
         </div>
 
         <div class="gift-boxes-grid">
 
-          <!-- ── Card 1: Honey Bunny ── -->
-          <article class="rh-card fade-up" aria-label="Honey Bunny gift box">
+          <!-- ── Card 1: Honey Bunny Solo (entry-level) ── -->
+          <article class="rh-card fade-up" aria-label="Honey Bunny Solo gift box">
+            <div class="rh-card-img">
+              <!-- TODO: drop real photo here — name it honey-bunny-solo.jpg and replace the placeholder div below with: <img src="honey-bunny-solo.jpg" alt="Honey Bunny Solo gift box — 500ML cocktail" width="600" height="480" loading="lazy"> -->
+              <div class="rh-card-img-placeholder" aria-hidden="true">
+                <svg viewBox="0 0 24 24" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                </svg>
+                <span>Honey Bunny Solo gift box photo</span>
+              </div>
+            </div>
+            <div class="rh-card-body">
+              <p class="rh-card-subtag">JUST THE COCKTAIL</p>
+              <h3 class="rh-card-name">HONEY BUNNY SOLO</h3>
+              <p class="rh-card-desc">Just the cocktail, no frills — the easiest way to say l'chaim. Perfect solo, in bulk, or as a light-touch gift.</p>
+              <p class="rh-card-includes-label">Box includes:</p>
+              <ul class="rh-card-includes">
+                <li>Honey Bunny cocktail 500ML</li>
+              </ul>
+              <div class="rh-card-price">
+                <span class="rh-card-price-label">Starting from</span>
+                <span class="rh-card-price-amount">69</span>
+                <span class="rh-card-price-currency">₪</span>
+              </div>
+              <a href="https://wa.me/972508989990?text=%D7%94%D7%99%20NIJ%20%26%20BIJ%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%94%D7%96%D7%9E%D7%99%D7%9F%20%D7%90%D7%AA%20%D7%9E%D7%90%D7%A8%D7%96%20HONEY%20BUNNY%20SOLO%20%D7%9C%D7%A8%D7%90%D7%A9%20%D7%94%D7%A9%D7%A0%D7%94%20(69%E2%82%AA)%20%F0%9F%8D%B9"
+                 class="btn btn-terra btn-full"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Order Honey Bunny Solo box on WhatsApp">
+                Order Now ✳
+              </a>
+            </div>
+          </article>
+
+          <!-- ── Card 2: Honey Bunny ── -->
+          <article class="rh-card fade-up fade-up-d1" aria-label="Honey Bunny gift box">
             <div class="rh-card-img">
               <!-- TODO: drop real photo here — name it honey-bunny.jpg and replace the placeholder div below with: <img src="honey-bunny.jpg" alt="Honey Bunny Rosh Hashanah gift box — 500ML cocktail, glasses, dried apples, terracotta cactus" width="600" height="480" loading="lazy"> -->
               <div class="rh-card-img-placeholder" aria-hidden="true">
@@ -957,8 +992,8 @@
             </div>
           </article>
 
-          <!-- ── Card 2: Special Mix (featured) ── -->
-          <article class="rh-card featured fade-up fade-up-d1" aria-label="Special Mix gift box">
+          <!-- ── Card 3: Special Mix (featured) ── -->
+          <article class="rh-card featured fade-up fade-up-d2" aria-label="Special Mix gift box">
             <div class="rh-card-img">
               <!-- TODO: drop real photo here — name it special-mix.jpg and replace the placeholder div below with: <img src="special-mix.jpg" alt="Special Mix gift box — 3 cocktails, apples, nuts, glasses" width="600" height="480" loading="lazy"> -->
               <div class="rh-card-img-placeholder" aria-hidden="true">
@@ -995,8 +1030,8 @@
             </div>
           </article>
 
-          <!-- ── Card 3: DIY PRO ── -->
-          <article class="rh-card fade-up fade-up-d2" aria-label="Honey Bunny DIY Pro gift box">
+          <!-- ── Card 4: DIY PRO ── -->
+          <article class="rh-card fade-up fade-up-d3" aria-label="Honey Bunny DIY Pro gift box">
             <div class="rh-card-img">
               <!-- TODO: drop real photo here — name it honey-bunny-diy-pro.jpg and replace the placeholder div below with: <img src="honey-bunny-diy-pro.jpg" alt="Honey Bunny DIY Pro gift box — Jack Daniel's, fresh ingredients, bar tools" width="600" height="480" loading="lazy"> -->
               <div class="rh-card-img-placeholder" aria-hidden="true">
