@@ -497,7 +497,7 @@
     .rh-card-includes li {
       font-size: 0.85rem;
       color: var(--text-mid);
-      padding-inline-end: 18px;
+      padding-inline-start: 18px;
       position: relative;
       line-height: 1.5;
     }
@@ -505,7 +505,7 @@
     .rh-card-includes li::before {
       content: '✳';
       position: absolute;
-      inset-inline-end: 0;
+      inset-inline-start: 0;
       color: var(--terra);
       font-size: 0.6rem;
       top: 4px;
@@ -539,6 +539,14 @@
       font-family: 'Inter', sans-serif;
     }
 
+    .rh-min-order {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: -8px;
+      margin-bottom: 16px;
+    }
+
     /* ================================================================
        Office / B2B Section
     ================================================================ */
@@ -555,6 +563,8 @@
     }
 
     .office-content { display: flex; flex-direction: column; gap: 16px; }
+    /* badge text stays English (like brand names) — pin to the physical left, matching the English page, not RTL-start */
+    .office-content .section-label { align-self: flex-end; }
 
     .office-features { display: flex; flex-direction: column; gap: 12px; margin: 8px 0 28px; }
 
@@ -674,9 +684,9 @@
 
     .trust-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      max-width: 960px;
+      max-width: 720px;
       margin: 0 auto;
     }
 
@@ -776,10 +786,6 @@
       .office-inner { grid-template-columns: 1fr; gap: 48px; }
       .office-img   { max-width: 480px; aspect-ratio: 16/9; }
       .gift-boxes-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 860px) {
-      .trust-grid      { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 640px) {
@@ -896,7 +902,7 @@
           </h1>
 
           <p class="hero-rh-sub fade-up fade-up-d2">
-            מתנות קוקטייל פרימיום לשנה החדשה — לבית, למשרד, לכל מי שמגיעה לו שנה טובה עם משקה ביד.<br>
+            מתנות קוקטייל פרימיום לשנה החדשה — לבית, למשרד, לכל מי שמגיע לו שנה טובה עם משקה ביד.<br>
             <strong>IT'S ALWAYS 5PM SOMEWHERE.</strong>
           </p>
 
@@ -919,41 +925,42 @@
         <div class="gift-boxes-header fade-up">
           <span class="section-label-terra">המארזים לראש השנה ✳</span>
           <h2 class="section-title" id="gift-boxes-title">בחרו את המארז המושלם</h2>
-          <p class="section-sub">ארבעה מארזים, ארבע רמות. כולם מגיעים עם אריזה יפה, מרכיבים טבעיים בלבד, ומשלוח לכל הארץ.</p>
+          <p class="section-sub">ארבעה מארזים, ארבע רמות. מרכיבים טבעיים בלבד, ומשלוח לכל הארץ.</p>
         </div>
 
         <div class="gift-boxes-grid">
 
           <!-- ── Card 1: Honey Bunny Solo (entry-level) ── -->
-          <article class="rh-card fade-up" aria-label="מארז האני באני – סולו">
+          <article class="rh-card fade-up" aria-label="מארז Honey Bunny Solo">
             <div class="rh-card-img">
-              <!-- TODO: drop real photo here — name it honey-bunny-solo.jpg and replace the placeholder div below with: <img src="honey-bunny-solo.jpg" alt="מארז האני באני – סולו — קוקטייל 500ML" width="600" height="480" loading="lazy"> -->
+              <!-- TODO: drop real photo here — name it honey-bunny-solo.jpg and replace the placeholder div below with: <img src="honey-bunny-solo.jpg" alt="מארז Honey Bunny Solo — קוקטייל 500 מ״ל" width="600" height="480" loading="lazy"> -->
               <div class="rh-card-img-placeholder" aria-hidden="true">
                 <svg viewBox="0 0 24 24" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
                 </svg>
-                <span>תמונת מארז האני באני – סולו</span>
+                <span>תמונת מארז Honey Bunny Solo</span>
               </div>
             </div>
             <div class="rh-card-body">
               <p class="rh-card-subtag">רק הקוקטייל</p>
-              <h3 class="rh-card-name">האני באני – סולו</h3>
-              <p class="rh-card-desc">רק הקוקטייל, בלי תוספות — הדרך הכי פשוטה להגיד לחיים. מושלם לבד, בכמות גדולה, או כמתנה קלילה.</p>
+              <h3 class="rh-card-name">Honey Bunny Solo</h3>
+              <p class="rh-card-desc">המארז הקלאסי לראש השנה – קוקטייל מוכן להגשה בבקבוק 500 מ״ל. מושלם לחלוקה לעובדים, לקוחות ושותפים.</p>
               <p class="rh-card-includes-label">המארז כולל:</p>
               <ul class="rh-card-includes">
-                <li>קוקטייל האני באני 500ML</li>
+                <li>קוקטייל האני באני 500 מ״ל</li>
               </ul>
               <div class="rh-card-price">
                 <span class="rh-card-price-label">מתחיל מ</span>
                 <span class="rh-card-price-amount">69</span>
                 <span class="rh-card-price-currency">₪</span>
               </div>
+              <p class="rh-min-order">מינימום הזמנה: 50 יחידות</p>
               <a href="https://wa.me/972508989990?text=%D7%94%D7%99%20NIJ%20%26%20BIJ%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%94%D7%96%D7%9E%D7%99%D7%9F%20%D7%90%D7%AA%20%D7%9E%D7%90%D7%A8%D7%96%20HONEY%20BUNNY%20SOLO%20%D7%9C%D7%A8%D7%90%D7%A9%20%D7%94%D7%A9%D7%A0%D7%94%20(69%E2%82%AA)%20%F0%9F%8D%B9"
                  class="btn btn-terra btn-full"
                  target="_blank"
                  rel="noopener noreferrer"
-                 aria-label="הזמן מארז האני באני – סולו דרך וואטסאפ">
-                להזמנה ✳
+                 aria-label="הזמן מארז Honey Bunny Solo דרך וואטסאפ">
+                ✳ להזמנה
               </a>
             </div>
           </article>
@@ -961,13 +968,7 @@
           <!-- ── Card 2: Honey Bunny ── -->
           <article class="rh-card fade-up fade-up-d1" aria-label="מארז Honey Bunny">
             <div class="rh-card-img">
-              <!-- TODO: drop real photo here — name it honey-bunny.jpg and replace the placeholder div below with: <img src="honey-bunny.jpg" alt="מארז Honey Bunny לראש השנה — קוקטייל 500ML, כוסות, תפוחים מיובשים, קקטוס טרקוטה" width="600" height="480" loading="lazy"> -->
-              <div class="rh-card-img-placeholder" aria-hidden="true">
-                <svg viewBox="0 0 24 24" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-                </svg>
-                <span>תמונת מארז Honey Bunny</span>
-              </div>
+              <img src="../assets/honey-bunny.jpg" alt="מארז Honey Bunny לראש השנה — קוקטייל 500 מ״ל, כוסות, סוכריות גומי, קקטוס טרקוטה" width="600" height="480" loading="lazy">
             </div>
             <div class="rh-card-body">
               <p class="rh-card-subtag">IT'S ALWAYS 5PM SOMEWHERE</p>
@@ -975,9 +976,9 @@
               <p class="rh-card-desc">המארז הקלאסי לראש השנה — קוקטייל מוכן להגשה, כוסות יפות, ומתיקות שמגיעה מהטבע.</p>
               <p class="rh-card-includes-label">המארז כולל:</p>
               <ul class="rh-card-includes">
-                <li>קוקטייל Honey Bunny 500ML</li>
-                <li>זוג כוסות קוקטייל (rock glasses)</li>
-                <li>תפוחים מיובשים טבעיים</li>
+                <li>קוקטייל Honey Bunny 500 מ״ל</li>
+                <li>זוג כוסות קוקטייל</li>
+                <li>סוכריות גומי</li>
                 <li>קקטוס קטן בעציץ טרקוטה</li>
               </ul>
               <div class="rh-card-price">
@@ -990,7 +991,7 @@
                  target="_blank"
                  rel="noopener noreferrer"
                  aria-label="הזמן מארז Honey Bunny דרך וואטסאפ">
-                הזמן עכשיו ✳
+                ✳ הזמן עכשיו
               </a>
             </div>
           </article>
@@ -998,13 +999,7 @@
           <!-- ── Card 3: Special Mix (featured) ── -->
           <article class="rh-card featured fade-up fade-up-d2" aria-label="מארז Special Mix">
             <div class="rh-card-img">
-              <!-- TODO: drop real photo here — name it special-mix.jpg and replace the placeholder div below with: <img src="special-mix.jpg" alt="מארז Special Mix — 3 קוקטיילים, תפוחים, אגוזים, כוסות" width="600" height="480" loading="lazy"> -->
-              <div class="rh-card-img-placeholder" aria-hidden="true">
-                <svg viewBox="0 0 24 24" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                <span>תמונת מארז Special Mix</span>
-              </div>
+              <img src="../assets/special-mix.jpg" alt="מארז Special Mix — 3 קוקטיילים, תפוחים, אגוזים, כוסות" width="600" height="480" loading="lazy">
               <span class="featured-badge">הכי פופולרי ✳</span>
             </div>
             <div class="rh-card-body">
@@ -1013,10 +1008,10 @@
               <p class="rh-card-desc">שלושה קוקטיילים, שלושה טעמים — מארז הטייסטינג המושלם לפתוח איתו את השנה.</p>
               <p class="rh-card-includes-label">המארז כולל:</p>
               <ul class="rh-card-includes">
-                <li>3 קוקטיילים 200ML כל אחד:<br>Honey Bunny, Basil Smash, Flora</li>
-                <li>תפוחים מיובשים טבעיים</li>
-                <li>אגוזים מעורבים</li>
-                <li>זוג כוסות קוקטייל (rock glasses)</li>
+                <li>3 קוקטיילים 200 מ״ל כל אחד:<br>Honey Bunny, Basil Smash, Flora</li>
+                <li>סוכריות גומי</li>
+                <li>מיקס פיצוחים</li>
+                <li>זוג כוסות קוקטייל</li>
               </ul>
               <div class="rh-card-price">
                 <span class="rh-card-price-label">מתחיל מ</span>
@@ -1028,7 +1023,7 @@
                  target="_blank"
                  rel="noopener noreferrer"
                  aria-label="הזמן מארז Special Mix דרך וואטסאפ">
-                הזמן עכשיו ✳
+                ✳ הזמן עכשיו
               </a>
             </div>
           </article>
@@ -1045,18 +1040,17 @@
               </div>
             </div>
             <div class="rh-card-body">
-              <p class="rh-card-subtag">לאמיתי שבאמיתיים</p>
+              <p class="rh-card-subtag">למבינים בלבד</p>
               <h3 class="rh-card-name">HONEY BUNNY DIY&nbsp;&gt;&gt;&nbsp;PRO!</h3>
-              <p class="rh-card-desc">כל מה שצריך כדי להכין קוקטייל Honey Bunny כמו בר-טנדר מקצועי — בבית שלכם.</p>
+              <p class="rh-card-desc">כל מה שצריך כדי להכין קוקטייל Honey Bunny כמו ברמן מקצועי — בבית שלכם.</p>
               <p class="rh-card-includes-label">המארז כולל:</p>
               <ul class="rh-card-includes">
-                <li>בקבוק Jack Daniel's 375ML</li>
-                <li>סירופ דבש תוצרת בית 100ML</li>
+                <li>בקבוק ג'ק דניאלס 375 מ״ל</li>
+                <li>סירופ דבש תוצרת בית 100 מ״ל</li>
                 <li>מיץ תפוחים טבעי + אנגוסטורה ביטרס</li>
                 <li>תפוח + לימון + ענף טימין טריים</li>
                 <li>שייקר קוקטייל 3 חלקים + ג'יגר</li>
                 <li>זוג כוסות גבוהות</li>
-                <li>הוראות הכנה מדויקות</li>
               </ul>
               <div class="rh-card-price">
                 <span class="rh-card-price-label">מתחיל מ</span>
@@ -1068,7 +1062,7 @@
                  target="_blank"
                  rel="noopener noreferrer"
                  aria-label="הזמן מארז Honey Bunny DIY Pro דרך וואטסאפ">
-                הזמן עכשיו ✳
+                ✳ הזמן עכשיו
               </a>
             </div>
           </article>
@@ -1083,9 +1077,9 @@
         <div class="office-inner">
 
           <div class="office-content fade-up">
-            <span class="section-label">RAISE A TOAST ✳</span>
+            <span class="section-label">✳ RAISE A TOAST</span>
             <h2 class="section-title" id="office-title">לחיים במשרד?</h2>
-            <p class="section-sub">רוצים לפתוח את השנה החדשה עם כולם? בואו נגיד L'Chaim ביחד — בבר קוקטייל מלא ישירות במשרד.</p>
+            <p class="section-sub">רוצים לפתוח את השנה החדשה עם כולם? בואו נגיד LeChaim ביחד — בבר קוקטייל מלא ישירות במשרד.</p>
 
             <div class="office-features">
               <div class="office-feature">
@@ -1205,32 +1199,6 @@
           <div class="trust-item fade-up fade-up-d2">
             <div class="trust-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L3 7v5c0 5.25 3.75 10.05 9 11 5.25-.95 9-5.75 9-11V7L12 2z"/>
-                <path d="M9 12l2 2 4-4"/>
-              </svg>
-            </div>
-            <div class="trust-text">
-              <h4>כשר למהדרין</h4>
-              <p>כל המוצרים כשרים.</p>
-            </div>
-          </div>
-
-          <div class="trust-item fade-up fade-up-d3">
-            <div class="trust-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"/>
-                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-              </svg>
-            </div>
-            <div class="trust-text">
-              <h4>מחירים לא כוללים מע"מ</h4>
-              <p>כל המחירים המוצגים הם ללא מע"מ.</p>
-            </div>
-          </div>
-
-          <div class="trust-item fade-up fade-up-d4">
-            <div class="trust-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
             </div>
@@ -1240,7 +1208,7 @@
             </div>
           </div>
 
-          <div class="trust-item fade-up fade-up-d4">
+          <div class="trust-item fade-up fade-up-d3">
             <div class="trust-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16"/>
