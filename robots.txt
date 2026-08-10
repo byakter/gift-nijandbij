@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /app.html
+
+Sitemap: https://gift.nijandbij.com/sitemap.xml

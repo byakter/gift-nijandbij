@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://gift.nijandbij.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/"/>
+  </url>
+  <url>
+    <loc>https://gift.nijandbij.com/he/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/"/>
+  </url>
+  <url>
+    <loc>https://gift.nijandbij.com/gifts.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/gifts.html"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/gifts.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/gifts.html"/>
+  </url>
+  <url>
+    <loc>https://gift.nijandbij.com/he/gifts.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/gifts.html"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/gifts.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/gifts.html"/>
+  </url>
+  <url>
+    <loc>https://gift.nijandbij.com/bar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/bar.html"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/bar.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/bar.html"/>
+  </url>
+  <url>
+    <loc>https://gift.nijandbij.com/he/bar.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/bar.html"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/bar.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/bar.html"/>
+  </url>
+  <url>
+    <loc>https://gift.nijandbij.com/rosh-hashanah.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/rosh-hashanah.html"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/rosh-hashanah.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/rosh-hashanah.html"/>
+  </url>
+  <url>
+    <loc>https://gift.nijandbij.com/he/rosh-hashanah.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/rosh-hashanah.html"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/rosh-hashanah.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/rosh-hashanah.html"/>
+  </url>
+</urlset>
