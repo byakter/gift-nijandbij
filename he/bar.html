@@ -269,7 +269,66 @@
       border-radius: 100px;
     }
 
-    @media (max-width: 768px) { .nav-links { display: none; } }
+    /* ================================================================
+       Mobile Nav Toggle + Menu
+    ================================================================ */
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      margin: 0;
+      border: none;
+      background: transparent;
+      color: var(--green);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .nav-toggle svg { width: 24px; height: 24px; display: block; }
+    .nav-toggle .icon-close { display: none; }
+    .nav-toggle.is-active .icon-menu { display: none; }
+    .nav-toggle.is-active .icon-close { display: block; }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(250,247,242,0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(213,205,190,0.5);
+      padding: 4px clamp(20px, 5vw, 80px) 24px;
+      box-shadow: 0 16px 32px rgba(45,92,63,0.1);
+    }
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      width: 100%;
+    }
+    .mobile-menu .nav-link,
+    .mobile-menu .nav-link-disabled {
+      width: 100%;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(213,205,190,0.35);
+    }
+    .mobile-menu .lang-switch { padding: 14px 0; }
+    .mobile-menu .btn { width: 100%; justify-content: center; margin-top: 14px; }
+
+    @media (max-width: 768px) {
+      .nav-inner > .nav-links { display: none; }
+      .nav-inner > .lang-switch { display: none; }
+      .nav-inner > .btn { display: none; }
+      .nav-toggle { display: inline-flex; }
+    }
 
     /* ================================================================
        Hero
@@ -1126,8 +1185,53 @@
         <span class="lang-opt lang-opt-active" aria-current="true">עב</span>
       </div>
       <a href="#quote" class="btn btn-primary">Get a Quote</a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="gifts.html" class="nav-link">Gift Bank</a>
+        <a href="bar.html" class="nav-link active" aria-current="page">Bar Services</a>
+        <a href="rosh-hashanah.html" class="nav-link">Rosh Hashanah</a>
+        <span class="nav-link-disabled" aria-disabled="true">Workshops <span class="nav-coming-soon">Soon</span></span>
+      </nav>
+      <div class="lang-switch" aria-label="Language">
+        <a href="../bar.html" class="lang-opt" hreflang="en">EN</a>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <span class="lang-opt lang-opt-active" aria-current="true">עב</span>
+      </div>
+      <a href="#quote" class="btn btn-primary">Get a Quote</a>
     </div>
   </header>
+  <script>
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      function closeMenu() {
+        menu.classList.remove('open');
+        toggle.classList.remove('is-active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      function openMenu() {
+        menu.classList.add('open');
+        toggle.classList.add('is-active');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      toggle.addEventListener('click', function () {
+        if (menu.classList.contains('open')) { closeMenu(); } else { openMenu(); }
+      });
+      menu.addEventListener('click', function (e) {
+        if (e.target.closest('a')) closeMenu();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
 
   <main>
 
