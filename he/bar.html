@@ -462,8 +462,10 @@
 
     .included-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
+      max-width: 760px;
+      margin: 0 auto;
     }
 
     .included-card {
@@ -1089,7 +1091,6 @@
       .hero-inner    { flex-direction: column; min-height: auto; }
       .hero-content  { flex: 1 1 auto; padding: calc(72px + 64px) clamp(20px, 5vw, 40px) 48px; }
       .hero-img-col  { flex: 0 0 300px; }
-      .included-grid { grid-template-columns: repeat(2, 1fr); }
       .gallery-grid  { grid-template-columns: repeat(2, 1fr); }
       .testimonials-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
     }
@@ -1265,8 +1266,7 @@
         </div>
 
         <div class="hero-img-col">
-          <!-- REPLACE: swap bar-hero.jpg with a real photo of your bar setup at an event -->
-          <img src="../assets/bar-hero.jpg" alt="בר קוקטיילים של NIJ &amp; BIJ באירוע" loading="eager">
+          <img src="../assets/Bar-Wide2.png" alt="בר קוקטיילים אלגנטי בפנים, עם פרחים טריים, פירות הדר, בקבוקי אלכוהול פרימיום, נרות ונברשת — עמדת בר מפוארת לאירוע" loading="eager">
         </div>
       </div>
     </section>
@@ -1291,7 +1291,7 @@
             </div>
             <div class="included-text">
               <h4>צוות בר מקצועי</h4>
-              <p>בר-טנדרים מנוסים שמכינים כל משקה לפי הזמנה ושומרים על הערב זורם.</p>
+              <p>ברמנים מנוסים שמכינים כל משקה לפי הזמנה ושומרים על הערב זורם.</p>
             </div>
           </div>
 
@@ -1334,38 +1334,13 @@
             </div>
           </div>
 
-          <div class="included-card fade-up fade-up-d4">
-            <div class="included-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            </div>
-            <div class="included-text">
-              <h4>עיצוב בר מסוגנן</h4>
-              <p>בר יפהפה שנראה טוב בדיוק כמו שהמשקאות טועמים.</p>
-            </div>
-          </div>
-
-          <div class="included-card fade-up fade-up-d5">
-            <div class="included-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-              </svg>
-            </div>
-            <div class="included-text">
-              <h4>כלי זכוכית וציוד</h4>
-              <p>שייקרים, כלים, כוסות — הכל כלול.</p>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
     <!-- ── Full-Width Atmosphere Image ─────────────────────────────── -->
     <div class="img-band" role="img" aria-label="אווירת הבר באירוע">
-      <!-- REPLACE: swap bar-atmosphere.jpg with a real atmosphere photo of your bar in action -->
-      <img src="../assets/bar-atmosphere.jpg" alt="אווירת הבר של NIJ &amp; BIJ באירוע" loading="lazy">
+      <img src="../assets/bar-event-atmosphere.jpg" alt="עמדת בר חוץ בסגנון בוהו, עם אהילי תלייה קלועים, מניפות ופנסי נייר צבעוניים, קישוטי חוטים, שמשיות וירק — בר קוקטיילים חגיגי תחת כיפת השמיים" loading="lazy">
     </div>
 
     <!-- ── Event Types ──────────────────────────────────────────────── -->
@@ -1388,6 +1363,7 @@
     </section>
 
     <!-- ── How It Works ─────────────────────────────────────────────── -->
+    <!--
     <section class="bar-how" id="how" aria-labelledby="how-title">
       <div class="container">
         <div class="bar-how-inner">
@@ -1429,12 +1405,12 @@
           </div>
 
           <div class="bar-how-img fade-up fade-up-d1">
-            <!-- REPLACE: add a real photo of the bar in action here (assets/bar-hero.jpg or similar) -->
-            <img src="../assets/bar-hero.jpg" alt="בר הקוקטיילים של NIJ &amp; BIJ בפעולה" loading="lazy">
+            <img src="../assets/bar-action.jpg" alt="ברמן מחייך מנער שייקר קוקטיילים, מוקף בפרחים טריים בחוץ" loading="lazy">
           </div>
         </div>
       </div>
     </section>
+    -->
 
     <!-- ── Gallery ──────────────────────────────────────────────────── -->
     <section class="gallery" id="gallery" aria-labelledby="gallery-title">
@@ -1447,22 +1423,22 @@
         <!-- REPLACE: swap each bar-1.jpg … bar-6.jpg with real event photos -->
         <div class="gallery-grid">
           <div class="gallery-item fade-up">
-            <img src="../assets/bar-1.jpg" alt="בר של NIJ &amp; BIJ באירוע — תמונה 1" loading="lazy">
+            <img src="../assets/bar-1.jpg" alt="ברמן יוצק קוקטייל מנוער לכוס נמוכה, עם פירות הדר וכוסות קוקטייל ברקע" loading="lazy">
           </div>
           <div class="gallery-item fade-up fade-up-d1">
-            <img src="../assets/bar-2.jpg" alt="בר של NIJ &amp; BIJ באירוע — תמונה 2" loading="lazy">
+            <img src="../assets/bar-2.jpg" alt="פינת בר מעוצבת: כרטיס תפריט הקוקטיילים של NIJ &amp; BIJ, פירות הדר טריים ונענע באגרטל" loading="lazy">
           </div>
           <div class="gallery-item fade-up fade-up-d2">
-            <img src="../assets/bar-3.jpg" alt="בר של NIJ &amp; BIJ באירוע — תמונה 3" loading="lazy">
+            <img src="../assets/bar-3.jpg" alt="עמדת בר בשעת דמדומים, עם סידור פרחים גדול וכרטיסי תפריט קוקטיילים" loading="lazy">
           </div>
           <div class="gallery-item fade-up fade-up-d1">
-            <img src="../assets/bar-4.jpg" alt="בר של NIJ &amp; BIJ באירוע — תמונה 4" loading="lazy">
+            <img src="../assets/bar-4.jpg" alt="תקריב על קוקטייל מוגמר, מקושט במרווה ודובדבן" loading="lazy">
           </div>
           <div class="gallery-item fade-up fade-up-d2">
-            <img src="../assets/bar-5.jpg" alt="בר של NIJ &amp; BIJ באירוע — תמונה 5" loading="lazy">
+            <img src="../assets/bar-5.jpg" alt="ברמן מסנן קוקטייל לכוסות עם שפה מסוכרת בצ'ילי ומלח" loading="lazy">
           </div>
           <div class="gallery-item fade-up fade-up-d3">
-            <img src="../assets/bar-6.jpg" alt="בר של NIJ &amp; BIJ באירוע — תמונה 6" loading="lazy">
+            <img src="../assets/bar-6.jpg" alt="קוקטייל ורוד בכוס קוקטייל, לצד מעמד כוסות זכוכית" loading="lazy">
           </div>
         </div>
       </div>
@@ -1483,12 +1459,11 @@
 
         <div class="testimonials-grid">
 
-          <!-- REPLACE with real testimonial -->
           <div class="testimonial-card fade-up">
             <div class="testimonial-quote" aria-hidden="true">"</div>
-            <p class="testimonial-text">הבר היה השיא של החתונה שלנו. כל האורחים דיברו על הקוקטיילים כל הערב.</p>
+            <p class="testimonial-text">היי ברק! רציתי קודם כל להודות לכם על הכל, כולם עפו עליכם ורואים שאת עושים הכל מאהבה גדולה 😍. הייתם הבחירה הכי טובה שיכולתי לעשות 😊</p>
             <div class="testimonial-author">
-              <p class="testimonial-name">שם לדוגמה</p>
+              <p class="testimonial-name">נועה פרנקל</p>
               <p class="testimonial-event-type">חתונה</p>
             </div>
           </div>
@@ -1503,12 +1478,11 @@
             </div>
           </div>
 
-          <!-- REPLACE with real testimonial -->
           <div class="testimonial-card fade-up fade-up-d2">
             <div class="testimonial-quote" aria-hidden="true">"</div>
-            <p class="testimonial-text">לא היינו צריכים לחשוב על כלום. הם טיפלו בהכל בצורה מושלמת.</p>
+            <p class="testimonial-text">יאוו שוב לומר תודה על אתמול, היה נעים, טעים, מושלם! איזה היי אנד אתם וואו!</p>
             <div class="testimonial-author">
-              <p class="testimonial-name">שם לדוגמה</p>
+              <p class="testimonial-name">תמי לשם</p>
               <p class="testimonial-event-type">מסיבה פרטית</p>
             </div>
           </div>
