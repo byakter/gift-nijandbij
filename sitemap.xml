@@ -37,16 +37,4 @@
     <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/bar.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/bar.html"/>
   </url>
-  <url>
-    <loc>https://gift.nijandbij.com/rosh-hashanah.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/rosh-hashanah.html"/>
-    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/rosh-hashanah.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/rosh-hashanah.html"/>
-  </url>
-  <url>
-    <loc>https://gift.nijandbij.com/he/rosh-hashanah.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/rosh-hashanah.html"/>
-    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/rosh-hashanah.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/rosh-hashanah.html"/>
-  </url>
 </urlset>
