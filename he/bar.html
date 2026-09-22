@@ -747,6 +747,19 @@
       gap: 20px;
     }
 
+    /* ================================================================
+       TEMPORARY — remove this rule when the 3rd testimonial is restored.
+       The placeholder card is commented out below, leaving only 2 cards;
+       this narrows the grid to 2 centered columns so it isn't left
+       unbalanced. Uncommenting that card without deleting this rule
+       will squeeze all 3 cards into 2 columns, so remove both together.
+    ================================================================ */
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
     .testimonial-card {
       background: var(--warm-white);
       border-radius: var(--radius);
@@ -1467,7 +1480,7 @@
             </div>
           </div>
 
-          <!-- REPLACE with real testimonial -->
+          <!-- Hidden until a real testimonial replaces this placeholder. Uncomment to restore.
           <div class="testimonial-card fade-up fade-up-d1">
             <div class="testimonial-quote" aria-hidden="true">"</div>
             <p class="testimonial-text">מקצועיים להפליא מהתחלה ועד הסוף. ההקמה הייתה מרהיבה והצוות היה פנטסטי.</p>
@@ -1476,6 +1489,7 @@
               <p class="testimonial-event-type">אירוע חברה</p>
             </div>
           </div>
+          -->
 
           <div class="testimonial-card fade-up fade-up-d2">
             <div class="testimonial-quote" aria-hidden="true">"</div>
