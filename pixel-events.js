@@ -10,7 +10,7 @@
   }
 
   /* ── 1. ViewContent — fires once on service/product pages ─────────── */
-  var SERVICE_SLUGS = ['gifts', 'bar', 'rosh-hashanah'];
+  var SERVICE_SLUGS = ['gifts', 'bar', 'rosh-hashanah', 'workshops'];
   var currentPath = window.location.pathname;
   if (SERVICE_SLUGS.some(function (s) { return currentPath.indexOf(s) !== -1; })) {
     safe(function () {

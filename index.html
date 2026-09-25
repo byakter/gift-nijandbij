@@ -236,29 +236,6 @@
     .nav-link:hover { color: var(--green); }
     .nav-link.active { color: var(--green); font-weight: 600; }
 
-    .nav-link-disabled {
-      font-size: 0.87rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      opacity: 0.55;
-      cursor: not-allowed;
-      white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-coming-soon {
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(90,122,101,0.12);
-      color: var(--text-muted);
-      padding: 2px 7px;
-      border-radius: 100px;
-    }
-
     /* ================================================================
        Mobile Nav Toggle + Menu
     ================================================================ */
@@ -304,8 +281,7 @@
       gap: 0;
       width: 100%;
     }
-    .mobile-menu .nav-link,
-    .mobile-menu .nav-link-disabled {
+    .mobile-menu .nav-link {
       width: 100%;
       padding: 14px 0;
       border-bottom: 1px solid rgba(213,205,190,0.35);
@@ -733,7 +709,7 @@
         <a href="index.html" class="nav-link active" aria-current="page">Home</a>
         <a href="gifts.html" class="nav-link">Gift Bank</a>
         <a href="bar.html" class="nav-link">Bar Services</a>
-        <span class="nav-link-disabled" aria-disabled="true">Workshops <span class="nav-coming-soon">Soon</span></span>
+        <a href="workshops.html" class="nav-link">Workshops</a>
       </nav>
       <div class="lang-switch" aria-label="Language">
         <span class="lang-opt lang-opt-active" aria-current="true">EN</span>
@@ -751,7 +727,7 @@
         <a href="index.html" class="nav-link active" aria-current="page">Home</a>
         <a href="gifts.html" class="nav-link">Gift Bank</a>
         <a href="bar.html" class="nav-link">Bar Services</a>
-        <span class="nav-link-disabled" aria-disabled="true">Workshops <span class="nav-coming-soon">Soon</span></span>
+        <a href="workshops.html" class="nav-link">Workshops</a>
       </nav>
       <div class="lang-switch" aria-label="Language">
         <span class="lang-opt lang-opt-active" aria-current="true">EN</span>
@@ -859,24 +835,21 @@
             </div>
           </a>
 
-          <!-- Workshops (disabled) -->
-          <div class="service-card service-card-disabled fade-up fade-up-d2" aria-disabled="true">
+          <!-- Workshops -->
+          <a href="workshops.html" class="service-card fade-up fade-up-d2">
             <div class="service-card-img">
-              <div class="service-card-icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-                </svg>
-              </div>
+              <img src="assets/workshop-team-stirring.jpg" alt="Participants mixing their own cocktails at a NIJ &amp; BIJ workshop" loading="lazy">
             </div>
             <div class="service-card-body">
               <p class="service-card-tag">Hands-On</p>
               <h3>Workshops</h3>
-              <p>Interactive cocktail workshops led by our mixologists, perfect for team events, parties, and brand activations.</p>
-              <span class="coming-soon-badge">Coming Soon</span>
+              <p>A hands-on cocktail workshop where everyone makes their own drinks, with professional tools and premium ingredients. Perfect for companies and private groups.</p>
+              <span class="service-card-link">
+                Explore Workshops
+                <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </div>
-          </div>
+          </a>
 
         </div>
       </div>
