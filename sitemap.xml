@@ -49,4 +49,16 @@
     <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/workshops.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/workshops.html"/>
   </url>
+  <url>
+    <loc>https://gift.nijandbij.com/home-bar-guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/home-bar-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/home-bar-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/home-bar-guide.html"/>
+  </url>
+  <url>
+    <loc>https://gift.nijandbij.com/he/home-bar-guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gift.nijandbij.com/home-bar-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://gift.nijandbij.com/he/home-bar-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gift.nijandbij.com/home-bar-guide.html"/>
+  </url>
 </urlset>
