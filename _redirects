@@ -3,6 +3,8 @@
 
 /pages/workshops    /workshops        301
 /pages/blog         /home-bar-guide   301
+/pages/workshops/   /workshops        301
+/pages/blog/        /home-bar-guide   301
 /collections        /                 301
 /cart               /                 301
 /search             /                 301
