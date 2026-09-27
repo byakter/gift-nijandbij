@@ -1,0 +1,12 @@
+{
+  // Cloudflare Workers config for the static site. No Worker code, static assets only.
+  "name": "nijandbij",
+  "compatibility_date": "2026-09-27",
+  "assets": {
+    "directory": ".",
+    // Serves /gifts from gifts.html and redirects /gifts.html to /gifts
+    "html_handling": "auto-trailing-slash",
+    // Unknown URLs return a plain 404. A custom 404.html page is planned for later.
+    "not_found_handling": "none"
+  }
+}
