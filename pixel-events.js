@@ -12,7 +12,9 @@
   /* ── 1. ViewContent — fires once on service/product pages ─────────── */
   var SERVICE_SLUGS = ['gifts', 'bar', 'rosh-hashanah', 'workshops'];
   var currentPath = window.location.pathname;
-  if (SERVICE_SLUGS.some(function (s) { return currentPath.indexOf(s) !== -1; })) {
+  var pathParts   = currentPath.split('/').filter(Boolean);
+  var currentSlug = (pathParts[pathParts.length - 1] || '').replace(/\.html$/, '');
+  if (SERVICE_SLUGS.indexOf(currentSlug) !== -1) {
     safe(function () {
       fbq('track', 'ViewContent', {
         content_name: document.title,
