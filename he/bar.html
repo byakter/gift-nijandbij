@@ -963,6 +963,8 @@
     .form-group input.field-error,
     .form-group select.field-error { border-color: #b83232; }
 
+    .form-group input[type="tel"] { direction: ltr; text-align: right; }
+
     .form-error-msg {
       display: none;
       font-size: 0.84rem;
@@ -970,6 +972,45 @@
       background: rgba(184,50,50,0.06);
       border-radius: 8px;
       padding: 10px 14px;
+    }
+
+    /* ================================================================
+       Success state (quote form)
+    ================================================================ */
+    .form-success {
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .form-success-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(45,92,63,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .form-success-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--green);
+      fill: none;
+    }
+
+    .form-success h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .form-success p {
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      line-height: 1.65;
     }
 
     /* ================================================================
@@ -1559,51 +1600,181 @@
           </div>
 
           <div class="contact-card fade-up fade-up-d1">
-            <form id="bar-quote-form" class="contact-form" novalidate>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="bq-name">השם שלכם</label>
-                  <input type="text" id="bq-name" name="name" placeholder="ישראל ישראלי" required autocomplete="name">
+            <div id="bq-form-wrap">
+              <form id="bar-quote-form" class="contact-form" novalidate>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="bq-name">שם מלא <span aria-hidden="true">*</span></label>
+                    <input type="text" id="bq-name" name="name" autocomplete="name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="bq-company">שם החברה (לאירוע חברה)</label>
+                    <input type="text" id="bq-company" name="company" autocomplete="organization">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="bq-date">תאריך האירוע <span aria-hidden="true">*</span></label>
+                    <input type="date" id="bq-date" name="event_date" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="bq-address">כתובת האירוע <span aria-hidden="true">*</span></label>
+                    <input type="text" id="bq-address" name="address" autocomplete="street-address" required>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label for="bq-date">תאריך האירוע</label>
-                  <input type="date" id="bq-date" name="event_date" required>
+                  <label for="bq-guests">מספר אורחים <span aria-hidden="true">*</span></label>
+                  <input type="number" id="bq-guests" name="guests" min="1" required>
                 </div>
-              </div>
-              <div class="form-row">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="bq-start-time">שעת התחלה</label>
+                    <select id="bq-start-time" name="start_time">
+                      <option value="">בחרו…</option>
+                      <option value="00:00">00:00</option>
+                      <option value="00:30">00:30</option>
+                      <option value="01:00">01:00</option>
+                      <option value="01:30">01:30</option>
+                      <option value="02:00">02:00</option>
+                      <option value="02:30">02:30</option>
+                      <option value="03:00">03:00</option>
+                      <option value="03:30">03:30</option>
+                      <option value="04:00">04:00</option>
+                      <option value="04:30">04:30</option>
+                      <option value="05:00">05:00</option>
+                      <option value="05:30">05:30</option>
+                      <option value="06:00">06:00</option>
+                      <option value="06:30">06:30</option>
+                      <option value="07:00">07:00</option>
+                      <option value="07:30">07:30</option>
+                      <option value="08:00">08:00</option>
+                      <option value="08:30">08:30</option>
+                      <option value="09:00">09:00</option>
+                      <option value="09:30">09:30</option>
+                      <option value="10:00">10:00</option>
+                      <option value="10:30">10:30</option>
+                      <option value="11:00">11:00</option>
+                      <option value="11:30">11:30</option>
+                      <option value="12:00">12:00</option>
+                      <option value="12:30">12:30</option>
+                      <option value="13:00">13:00</option>
+                      <option value="13:30">13:30</option>
+                      <option value="14:00">14:00</option>
+                      <option value="14:30">14:30</option>
+                      <option value="15:00">15:00</option>
+                      <option value="15:30">15:30</option>
+                      <option value="16:00">16:00</option>
+                      <option value="16:30">16:30</option>
+                      <option value="17:00">17:00</option>
+                      <option value="17:30">17:30</option>
+                      <option value="18:00">18:00</option>
+                      <option value="18:30">18:30</option>
+                      <option value="19:00">19:00</option>
+                      <option value="19:30">19:30</option>
+                      <option value="20:00">20:00</option>
+                      <option value="20:30">20:30</option>
+                      <option value="21:00">21:00</option>
+                      <option value="21:30">21:30</option>
+                      <option value="22:00">22:00</option>
+                      <option value="22:30">22:30</option>
+                      <option value="23:00">23:00</option>
+                      <option value="23:30">23:30</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="bq-end-time">שעת סיום</label>
+                    <select id="bq-end-time" name="end_time">
+                      <option value="">בחרו…</option>
+                      <option value="00:00">00:00</option>
+                      <option value="00:30">00:30</option>
+                      <option value="01:00">01:00</option>
+                      <option value="01:30">01:30</option>
+                      <option value="02:00">02:00</option>
+                      <option value="02:30">02:30</option>
+                      <option value="03:00">03:00</option>
+                      <option value="03:30">03:30</option>
+                      <option value="04:00">04:00</option>
+                      <option value="04:30">04:30</option>
+                      <option value="05:00">05:00</option>
+                      <option value="05:30">05:30</option>
+                      <option value="06:00">06:00</option>
+                      <option value="06:30">06:30</option>
+                      <option value="07:00">07:00</option>
+                      <option value="07:30">07:30</option>
+                      <option value="08:00">08:00</option>
+                      <option value="08:30">08:30</option>
+                      <option value="09:00">09:00</option>
+                      <option value="09:30">09:30</option>
+                      <option value="10:00">10:00</option>
+                      <option value="10:30">10:30</option>
+                      <option value="11:00">11:00</option>
+                      <option value="11:30">11:30</option>
+                      <option value="12:00">12:00</option>
+                      <option value="12:30">12:30</option>
+                      <option value="13:00">13:00</option>
+                      <option value="13:30">13:30</option>
+                      <option value="14:00">14:00</option>
+                      <option value="14:30">14:30</option>
+                      <option value="15:00">15:00</option>
+                      <option value="15:30">15:30</option>
+                      <option value="16:00">16:00</option>
+                      <option value="16:30">16:30</option>
+                      <option value="17:00">17:00</option>
+                      <option value="17:30">17:30</option>
+                      <option value="18:00">18:00</option>
+                      <option value="18:30">18:30</option>
+                      <option value="19:00">19:00</option>
+                      <option value="19:30">19:30</option>
+                      <option value="20:00">20:00</option>
+                      <option value="20:30">20:30</option>
+                      <option value="21:00">21:00</option>
+                      <option value="21:30">21:30</option>
+                      <option value="22:00">22:00</option>
+                      <option value="22:30">22:30</option>
+                      <option value="23:00">23:00</option>
+                      <option value="23:30">23:30</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="bq-occasion">מה חוגגים?</label>
+                    <select id="bq-occasion" name="occasion">
+                      <option value="" selected>בחרו…</option>
+                      <option value="Wedding">חתונה</option>
+                      <option value="Birthday">יום הולדת</option>
+                      <option value="Corporate event">אירוע חברה</option>
+                      <option value="Bachelor / bachelorette party">מסיבת רווקים / רווקות</option>
+                      <option value="Toast / celebration">הרמת כוסית / חגיגה</option>
+                      <option value="Other">אחר</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="bq-phone">מספר טלפון <span aria-hidden="true">*</span></label>
+                    <input type="tel" id="bq-phone" name="phone" autocomplete="tel" required>
+                  </div>
+                </div>
                 <div class="form-group">
-                  <label for="bq-location">מיקום</label>
-                  <input type="text" id="bq-location" name="location" placeholder="תל אביב" required>
+                  <label for="bq-notes">הערות נוספות</label>
+                  <textarea id="bq-notes" name="notes" placeholder="משהו נוסף שכדאי שנדע…"></textarea>
                 </div>
-                <div class="form-group">
-                  <label for="bq-guests">מספר אורחים משוער</label>
-                  <input type="number" id="bq-guests" name="guests" placeholder="80" min="1" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="bq-type">סוג האירוע</label>
-                <select id="bq-type" name="event_type" required>
-                  <option value="" disabled selected>בחרו סוג אירוע…</option>
-                  <option value="Wedding">חתונה</option>
-                  <option value="Corporate event">אירוע חברה</option>
-                  <option value="Private party">מסיבה פרטית</option>
-                  <option value="Brand activation">הפעלת מותג</option>
-                  <option value="Birthday">יום הולדת</option>
-                  <option value="Other">אחר</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="bq-notes">הערות (אופציונלי)</label>
-                <textarea id="bq-notes" name="notes" placeholder="משהו שכדאי שנדע על האירוע שלכם…"></textarea>
-              </div>
 
-              <p class="form-error-msg" id="bq-error" role="alert">אנא מלאו את כל השדות הנדרשים.</p>
+                <p class="form-error-msg" id="bq-error" role="alert" aria-live="polite"></p>
 
-              <button type="submit" class="btn btn-primary btn-full btn-lg">
-                שלחו דרך וואטסאפ
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </form>
+                <button type="submit" id="bq-submit" class="btn btn-primary btn-full btn-lg">
+                  שלחו בקשה
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </form>
+            </div>
+
+            <div id="bq-success" style="display: none" class="form-success" role="status" aria-live="polite">
+              <div class="form-success-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <h3>הבקשה נשלחה!</h3>
+              <p>תודה! קיבלנו את הבקשה שלכם ונחזור אליכם בקרוב.</p>
+            </div>
           </div>
 
         </div>
@@ -1663,67 +1834,93 @@
 
       document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-      /* -- Quote form: build WhatsApp message and open wa.me ---- */
-      document.getElementById('bar-quote-form').addEventListener('submit', function (e) {
-        e.preventDefault();
+      /* -- Quote form ------------------------------------------- */
+      function bqVals() {
+        return {
+          name:       document.getElementById('bq-name').value.trim(),
+          company:    document.getElementById('bq-company').value.trim(),
+          event_date: document.getElementById('bq-date').value,
+          address:    document.getElementById('bq-address').value.trim(),
+          guests:     document.getElementById('bq-guests').value.trim(),
+          start_time: document.getElementById('bq-start-time').value,
+          end_time:   document.getElementById('bq-end-time').value,
+          occasion:   document.getElementById('bq-occasion').value,
+          phone:      document.getElementById('bq-phone').value.trim(),
+          notes:      document.getElementById('bq-notes').value.trim()
+        };
+      }
 
-        var name     = document.getElementById('bq-name').value.trim();
-        var date     = document.getElementById('bq-date').value;
-        var location = document.getElementById('bq-location').value.trim();
-        var guests   = document.getElementById('bq-guests').value.trim();
-        var type     = document.getElementById('bq-type').value;
-        var notes    = document.getElementById('bq-notes').value.trim();
-
+      function bqValidate(v) {
         var required = [
-          {id: 'bq-name',     val: name},
-          {id: 'bq-date',     val: date},
-          {id: 'bq-location', val: location},
-          {id: 'bq-guests',   val: guests},
-          {id: 'bq-type',     val: type}
+          {id: 'bq-name',    val: v.name},
+          {id: 'bq-date',    val: v.event_date},
+          {id: 'bq-address', val: v.address},
+          {id: 'bq-guests',  val: v.guests},
+          {id: 'bq-phone',   val: v.phone}
         ];
-
-        var valid = true;
+        var ok = true;
         required.forEach(function (f) {
           var el = document.getElementById(f.id);
           if (!f.val) {
             el.classList.add('field-error');
-            valid = false;
+            ok = false;
           } else {
             el.classList.remove('field-error');
           }
         });
+        return ok;
+      }
 
-        if (!valid) {
-          document.getElementById('bq-error').style.display = 'block';
+      /* Send Request → Formspree (fetch, stay on page) */
+      document.getElementById('bar-quote-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = bqVals();
+        var errorEl = document.getElementById('bq-error');
+        var submitBtn = document.getElementById('bq-submit');
+
+        if (!bqValidate(v)) {
+          errorEl.textContent = 'אנא מלאו את כל השדות הנדרשים.';
+          errorEl.style.display = 'block';
           return;
         }
+        errorEl.style.display = 'none';
 
-        document.getElementById('bq-error').style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'שולח…';
 
-        /* Format date for readability */
-        var dateLabel = date;
-        try { dateLabel = new Date(date + 'T00:00:00').toLocaleDateString('he-IL', {day:'numeric',month:'long',year:'numeric'}); } catch(_) {}
-
-        var msg = 'היי NIJ & BIJ, אשמח לקבל הצעת מחיר לשירות בר. ' +
-          'שם: ' + name + '. ' +
-          'תאריך: ' + dateLabel + '. ' +
-          'מיקום: ' + location + '. ' +
-          'מספר אורחים: ' + guests + '. ' +
-          'סוג אירוע: ' + type + '.' +
-          (notes ? ' הערות: ' + notes + '.' : '');
-
-        window.open(
-          'https://wa.me/972508989990?text=' + encodeURIComponent(msg),
-          '_blank',
-          'noopener,noreferrer'
-        );
-
-        if (typeof gtag === 'function') {
-          gtag('event', 'bar_quote_request', {'event_category': 'lead', 'event_label': type});
-        }
-        if (typeof fbq === 'function') {
-          fbq('track', 'Lead', { content_name: 'Form Submission', content_category: 'Lead' });
-        }
+        fetch('https://formspree.io/f/mqevnedo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(v)
+        })
+          .then(function (res) {
+            return res.json().then(function (d) {
+              return { ok: res.ok, data: d };
+            });
+          })
+          .then(function (r) {
+            if (r.ok) {
+              document.getElementById('bq-form-wrap').style.display = 'none';
+              document.getElementById('bq-success').style.display = '';
+              if (typeof gtag === 'function') {
+                gtag('event', 'bar_quote_request', {'event_category': 'lead'});
+              }
+              if (typeof fbq === 'function') {
+                fbq('track', 'Lead', { content_name: 'Form Submission', content_category: 'Lead' });
+              }
+            } else {
+              throw new Error('submission_failed');
+            }
+          })
+          .catch(function () {
+            errorEl.textContent = 'משהו השתבש. נסו שוב, או פנו אלינו בוואטסאפ.';
+            errorEl.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'שלחו בקשה';
+          });
       });
 
     })();
