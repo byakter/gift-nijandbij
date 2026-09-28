@@ -10,7 +10,7 @@
   }
 
   /* ── 1. ViewContent — fires once on service/product pages ─────────── */
-  var SERVICE_SLUGS = ['gifts', 'bar', 'rosh-hashanah', 'workshops'];
+  var SERVICE_SLUGS = ['gifts', 'bar', 'workshops'];
   var currentPath = window.location.pathname;
   var pathParts   = currentPath.split('/').filter(Boolean);
   var currentSlug = (pathParts[pathParts.length - 1] || '').replace(/\.html$/, '');

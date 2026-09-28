@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /app
+Disallow:
 
 Sitemap: https://www.nijandbij.com/sitemap.xml

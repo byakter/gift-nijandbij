@@ -1,5 +1,4 @@
 .git
 .gitignore
-CNAME
 wrangler.jsonc
 .claude
