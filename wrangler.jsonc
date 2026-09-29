@@ -6,7 +6,7 @@
     "directory": ".",
     // Serves /gifts from gifts.html and redirects /gifts.html to /gifts
     "html_handling": "auto-trailing-slash",
-    // Unknown URLs return a plain 404. A custom 404.html page is planned for later.
-    "not_found_handling": "none"
+    // Unknown URLs get the nearest 404.html with a 404 status: he/404.html under /he/, otherwise 404.html
+    "not_found_handling": "404-page"
   }
 }
