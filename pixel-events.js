@@ -41,6 +41,9 @@
             content_category: 'Contact'
           });
         });
+        if (typeof gtag === 'function') {
+          gtag('event', 'whatsapp_click');
+        }
         return;
       }
       el = el.parentElement;
