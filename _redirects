@@ -1,10 +1,10 @@
 # Old Shopify store (www.nijandbij.com) redirects
 # Specific rules first, group rules after
 
-/pages/workshops    /workshops        301
-/pages/blog         /home-bar-guide   301
-/pages/workshops/   /workshops        301
-/pages/blog/        /home-bar-guide   301
+/pages/workshops    /he/workshops     301
+/pages/blog         /he/home-bar-guide 301
+/pages/workshops/   /he/workshops     301
+/pages/blog/        /he/home-bar-guide 301
 /collections        /                 301
 /cart               /                 301
 /search             /                 301
