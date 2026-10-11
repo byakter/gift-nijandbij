@@ -978,6 +978,7 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
     <script defer src="pixel-events.js"></script>
+    <script defer src="visit-source.js"></script>
   </head>
   <body>
     <!-- ── Navigation ──────────────────────────────────────────────── -->
@@ -1903,6 +1904,8 @@
           .addEventListener('submit', function (e) {
             e.preventDefault();
             var v = bqVals();
+            /* Add hidden visit-source fields (from visit-source.js) */
+            Array.prototype.forEach.call(this.querySelectorAll('input[type="hidden"]'), function (h) { if (!(h.name in v)) v[h.name] = h.value; });
             var errorEl = document.getElementById('bq-error');
             var submitBtn = document.getElementById('bq-submit');
 
