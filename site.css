@@ -19,6 +19,8 @@
   --shadow-lg:   0 10px 48px rgba(45,92,63,0.14);
   --radius:      16px;
   --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --wa-offset:   28px;   /* WhatsApp float: distance from viewport edge */
+  --wa-size:     58px;   /* WhatsApp float: button size */
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -276,16 +278,23 @@ ul  { list-style: none; }
 }
 .footer-contact a:hover { color: var(--green); }
 
+/* Alcohol warning: own centred line; size and colour come from .footer-copy */
+.footer-warning {
+  text-align: center;
+  margin-top: 24px;
+}
+.footer-warning span { display: block; }
+
 /* ================================================================
    WhatsApp Float
 ================================================================ */
 .wa-btn {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
+  bottom: var(--wa-offset);
+  right: var(--wa-offset);
   z-index: 990;
-  width: 58px;
-  height: 58px;
+  width: var(--wa-size);
+  height: var(--wa-size);
   background: #25D366;
   border-radius: 50%;
   display: flex;
@@ -308,11 +317,13 @@ ul  { list-style: none; }
 @media (max-width: 640px) {
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
   .footer-contact { flex-direction: column; gap: 8px; align-items: flex-start; }
+  /* Last footer line ends 16px above the WhatsApp float when scrolled to the bottom */
+  .footer { padding-bottom: calc(var(--wa-offset) + var(--wa-size) + 16px); }
 }
 
 @media (max-width: 480px) {
+  :root { --wa-offset: 20px; --wa-size: 52px; }
   .nav { padding: 0 20px; }
-  .wa-btn { bottom: 20px; right: 20px; width: 52px; height: 52px; }
 }
 
 /* ================================================================
