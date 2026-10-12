@@ -32,7 +32,7 @@
     '#age-gate-overlay{position:fixed;inset:0;z-index:99999;background:#FAF7F2;display:flex;align-items:center;justify-content:center;padding:24px;font-family:\'Inter\',system-ui,sans-serif}',
     '.age-gate-wrap{background:#FAF7F2;border-radius:20px;padding:56px 48px 48px;max-width:440px;width:100%;text-align:center}',
     '@media(max-width:480px){.age-gate-wrap{padding:40px 28px 36px}}',
-    '.age-gate-brand{font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#2D5C3F;margin-bottom:24px}',
+    '.age-gate-logo{width:140px;aspect-ratio:120.16/109.74;margin:0 auto 28px;background:#2D5C3F;-webkit-mask:url(/assets/nijbij-logo.svg) center/contain no-repeat;mask:url(/assets/nijbij-logo.svg) center/contain no-repeat}',
     '.age-gate-title{font-size:clamp(1.5rem,3vw,1.85rem);font-weight:800;color:#1C2B1E;line-height:1.15;margin-bottom:12px}',
     '.age-gate-sub{font-size:.94rem;color:#6B7C72;line-height:1.65;margin:0 auto 32px;max-width:320px}',
     '.age-gate-btns{display:flex;gap:12px}',
@@ -56,7 +56,7 @@
   el.setAttribute('dir', isHe ? 'rtl' : 'ltr');
   el.innerHTML =
     '<div class="age-gate-wrap" id="age-gate-check">' +
-      '<p class="age-gate-brand">NIJ &amp; BIJ</p>' +
+      '<div class="age-gate-logo" role="img" aria-label="NIJ &amp; BIJ"></div>' +
       '<h2 class="age-gate-title">' + t.title + '</h2>' +
       '<p class="age-gate-sub">' + t.question + '</p>' +
       '<div class="age-gate-btns">' +
@@ -65,7 +65,7 @@
       '</div>' +
     '</div>' +
     '<div class="age-gate-wrap" id="age-gate-denied" style="display:none" role="alert">' +
-      '<p class="age-gate-brand">NIJ &amp; BIJ</p>' +
+      '<div class="age-gate-logo" role="img" aria-label="NIJ &amp; BIJ"></div>' +
       '<p class="age-gate-denied-title">' + t.deniedTitle + '</p>' +
       '<p class="age-gate-denied-msg">' + t.deniedMsg + '</p>' +
     '</div>';
