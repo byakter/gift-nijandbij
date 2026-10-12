@@ -1,11 +1,30 @@
 /* gate.js — Age-gate overlay shared across all pages.
    Include via <script src="gate.js"></script> before </body> on every page.
    Shows a full-screen overlay if sessionStorage "ageVerified" is not set.
-   On success sets "ageVerified" and removes the overlay. */
+   Asks "18 or older?" in the page's language (<html lang>; Hebrew is RTL).
+   "Yes" sets "ageVerified" and removes the overlay; "No" shows the restricted message. */
 
 (function () {
   'use strict';
   if (sessionStorage.getItem('ageVerified')) return;
+
+  /* ── Text ─────────────────────────────────────────────────────── */
+  var isHe = /^he\b/i.test(document.documentElement.lang || '');
+  var t = isHe ? {
+    title:       'אימות גיל',
+    question:    'האם מלאו לך 18?',
+    yes:         'כן',
+    no:          'לא',
+    deniedTitle: 'הגישה מוגבלת',
+    deniedMsg:   'מצטערים, האתר מיועד למי שמלאו לו 18 בלבד.'
+  } : {
+    title:       'Age verification',
+    question:    'Are you 18 or older?',
+    yes:         'Yes',
+    no:          'No',
+    deniedTitle: 'Access Restricted',
+    deniedMsg:   'Sorry, this site is intended for adults only. You must be 18 or older to enter.'
+  };
 
   /* ── CSS ──────────────────────────────────────────────────────── */
   var s = document.createElement('style');
@@ -16,15 +35,12 @@
     '.age-gate-brand{font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#2D5C3F;margin-bottom:24px}',
     '.age-gate-title{font-size:clamp(1.5rem,3vw,1.85rem);font-weight:800;color:#1C2B1E;line-height:1.15;margin-bottom:12px}',
     '.age-gate-sub{font-size:.94rem;color:#6B7C72;line-height:1.65;margin:0 auto 32px;max-width:320px}',
-    '.age-gate-input{width:100%;padding:14px 16px;font-size:1.05rem;font-family:\'Inter\',system-ui,sans-serif;border:1.5px solid #D5CDBE;border-radius:10px;background:#fff;color:#1E3F2B;text-align:center;letter-spacing:.06em;outline:none;transition:border-color .2s;-moz-appearance:textfield;box-sizing:border-box}',
-    '.age-gate-input::-webkit-outer-spin-button,.age-gate-input::-webkit-inner-spin-button{-webkit-appearance:none}',
-    '.age-gate-input:focus{border-color:#2D5C3F}',
-    '.age-gate-input.error{border-color:#b83232}',
-    '.age-gate-error{font-size:.8rem;color:#b83232;margin-top:8px;min-height:1.2em;text-align:center}',
-    '.age-gate-btn{width:100%;padding:16px;margin-top:16px;font-size:1rem;font-weight:600;font-family:\'Inter\',system-ui,sans-serif;background:#2D5C3F;color:#F2EDE3;border:none;border-radius:10px;cursor:pointer;transition:background .2s,transform .2s;box-sizing:border-box}',
-    '.age-gate-btn:hover{background:#4A8060;transform:translateY(-1px)}',
+    '.age-gate-btns{display:flex;gap:12px}',
+    '.age-gate-btn{flex:1;padding:16px;font-size:1rem;font-weight:600;font-family:\'Inter\',system-ui,sans-serif;background:#2D5C3F;color:#F2EDE3;border:1.5px solid #2D5C3F;border-radius:10px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s;box-sizing:border-box}',
+    '.age-gate-btn:hover{background:#4A8060;border-color:#4A8060;transform:translateY(-1px)}',
     '.age-gate-btn:active{transform:translateY(0)}',
-    '.age-gate-legal{font-size:.7rem;color:#AABAA8;line-height:1.55;margin-top:24px}',
+    '.age-gate-btn-no{background:transparent;color:#2D5C3F;border-color:#D5CDBE}',
+    '.age-gate-btn-no:hover{background:#fff;border-color:#2D5C3F}',
     '.age-gate-denied-title{font-size:1.4rem;font-weight:700;color:#1C2B1E;margin-bottom:14px}',
     '.age-gate-denied-msg{font-size:.95rem;color:#6B7C72;line-height:1.7}'
   ].join('');
@@ -35,53 +51,37 @@
   el.id = 'age-gate-overlay';
   el.setAttribute('role', 'dialog');
   el.setAttribute('aria-modal', 'true');
-  el.setAttribute('aria-label', 'Age verification');
+  el.setAttribute('aria-label', t.title);
+  el.setAttribute('lang', isHe ? 'he' : 'en');
+  el.setAttribute('dir', isHe ? 'rtl' : 'ltr');
   el.innerHTML =
     '<div class="age-gate-wrap" id="age-gate-check">' +
       '<p class="age-gate-brand">NIJ &amp; BIJ</p>' +
-      '<h2 class="age-gate-title">Welcome to NIJ &amp; BIJ</h2>' +
-      '<p class="age-gate-sub">Our products contain alcohol. Please enter your year of birth to continue.</p>' +
-      '<input type="number" id="age-gate-year" class="age-gate-input" placeholder="Year of birth (YYYY)" min="1900" max="2010" inputmode="numeric" autocomplete="bday-year" aria-label="Year of birth">' +
-      '<p class="age-gate-error" id="age-gate-err" aria-live="polite"></p>' +
-      '<button class="age-gate-btn" id="age-gate-submit">Enter Site</button>' +
-      '<p class="age-gate-legal">By entering, you confirm you are of legal drinking age in your country.</p>' +
+      '<h2 class="age-gate-title">' + t.title + '</h2>' +
+      '<p class="age-gate-sub">' + t.question + '</p>' +
+      '<div class="age-gate-btns">' +
+        '<button type="button" class="age-gate-btn" id="age-gate-yes">' + t.yes + '</button>' +
+        '<button type="button" class="age-gate-btn age-gate-btn-no" id="age-gate-no">' + t.no + '</button>' +
+      '</div>' +
     '</div>' +
     '<div class="age-gate-wrap" id="age-gate-denied" style="display:none" role="alert">' +
       '<p class="age-gate-brand">NIJ &amp; BIJ</p>' +
-      '<p class="age-gate-denied-title">Access Restricted</p>' +
-      '<p class="age-gate-denied-msg">Sorry, this site is intended for adults only. You must be 18 or older to enter.</p>' +
+      '<p class="age-gate-denied-title">' + t.deniedTitle + '</p>' +
+      '<p class="age-gate-denied-msg">' + t.deniedMsg + '</p>' +
     '</div>';
 
   document.body.appendChild(el);
   document.body.style.overflow = 'hidden';
 
   /* ── Logic ────────────────────────────────────────────────────── */
-  var input   = document.getElementById('age-gate-year');
-  var errorEl = document.getElementById('age-gate-err');
+  document.getElementById('age-gate-yes').addEventListener('click', function () {
+    sessionStorage.setItem('ageVerified', '1');
+    el.remove();
+    document.body.style.overflow = '';
+  });
 
-  document.getElementById('age-gate-submit').addEventListener('click', verify);
-  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') verify(); });
-
-  function verify() {
-    var val  = input.value.trim();
-    var year = parseInt(val, 10);
-    var now  = new Date().getFullYear();
-    errorEl.textContent = '';
-    input.classList.remove('error');
-
-    if (!val || isNaN(year) || val.length !== 4 || year < 1900 || year > now) {
-      errorEl.textContent = 'Please enter a valid year of birth.';
-      input.classList.add('error');
-      return;
-    }
-
-    if (now - year >= 18) {
-      sessionStorage.setItem('ageVerified', '1');
-      el.remove();
-      document.body.style.overflow = '';
-    } else {
-      document.getElementById('age-gate-check').style.display = 'none';
-      document.getElementById('age-gate-denied').removeAttribute('style');
-    }
-  }
+  document.getElementById('age-gate-no').addEventListener('click', function () {
+    document.getElementById('age-gate-check').style.display = 'none';
+    document.getElementById('age-gate-denied').removeAttribute('style');
+  });
 })();
