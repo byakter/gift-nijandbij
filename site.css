@@ -321,6 +321,23 @@ ul  { list-style: none; }
   font-weight: 500;
 }
 
+/* Grid variant: icon above label, 4 columns (2 at 860px and below) */
+.feature-list--grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.feature-list--grid .feature-list-item {
+  flex-direction: column;
+  text-align: center;
+  gap: 12px;
+}
+@media (max-width: 860px) {
+  .feature-list--grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
+}
+
 /* ================================================================
    WhatsApp Float
 ================================================================ */
