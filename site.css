@@ -409,11 +409,6 @@ ul  { list-style: none; }
   color: var(--text-muted);
   margin-top: 8px;
 }
-.reviews-rating {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 24px;
-}
 @media (max-width: 860px) {
   .reviews-list { grid-template-columns: 1fr; gap: 20px; }
 }
