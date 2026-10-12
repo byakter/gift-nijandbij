@@ -377,6 +377,51 @@ ul  { list-style: none; }
 }
 
 /* ================================================================
+   Reviews (light quote strip; 3 columns, stacked at 860px and below)
+================================================================ */
+.reviews {
+  max-width: 960px;
+  margin: 28px auto 0;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.reviews-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.reviews-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.reviews-quote {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+  text-wrap: balance;
+}
+.reviews-author {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+.reviews-rating {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 24px;
+}
+@media (max-width: 860px) {
+  .reviews-list { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 640px) {
+  .reviews { text-align: start; }
+}
+
+/* ================================================================
    WhatsApp Float
 ================================================================ */
 .wa-btn {
