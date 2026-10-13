@@ -417,7 +417,7 @@ ul  { list-style: none; }
 }
 
 /* ================================================================
-   Pricing (tier cards; 3 columns, stacked at 860px and below)
+   Pricing (tier cards; 3 columns, stacked and compact at 860px and below)
 ================================================================ */
 .pricing {
   background: var(--warm-white);
@@ -563,6 +563,29 @@ ul  { list-style: none; }
   .pricing-grid  { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
   .pricing-card.featured { transform: none; }
   .pricing-card.featured:hover { transform: translateY(-5px); }
+
+  /* Compact card: tier on top, units and price side by side, button below
+     (grid columns follow the text direction, so RTL needs no extra rules) */
+  .pricing-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "tier  tier"
+      "num   price"
+      "label price"
+      "btn   btn";
+    column-gap: 16px;
+    padding: 26px 24px 24px;
+  }
+  .pricing-card.featured { padding-top: 34px; } /* room below the "most popular" badge */
+  .pricing-tier        { grid-area: tier; margin-bottom: 14px; }
+  .pricing-units-num   { grid-area: num; font-size: 2.4rem; }
+  .pricing-units-label { grid-area: label; margin-bottom: 0; }
+  .pricing-divider     { display: none; }
+  .pricing-price-row   { grid-area: price; align-self: center; justify-self: end; margin-bottom: 0; }
+  .pricing-currency    { font-size: 1rem; }
+  .pricing-amount      { font-size: 1.8rem; }
+  .btn-pricing         { grid-area: btn; margin-top: 18px; }
 }
 
 /* ================================================================
