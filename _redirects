@@ -17,11 +17,13 @@
 /bar.html           /bar              301
 /workshops.html     /workshops        301
 /home-bar-guide.html /home-bar-guide   301
+/privacy.html       /privacy          301
 /he/index.html      /he/              301
 /he/gifts.html      /he/gifts         301
 /he/bar.html        /he/bar           301
 /he/workshops.html  /he/workshops     301
 /he/home-bar-guide.html /he/home-bar-guide 301
+/he/privacy.html    /he/privacy       301
 
 # Retired redirect pages -> gifts
 /app                /gifts            301
