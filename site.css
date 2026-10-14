@@ -346,6 +346,20 @@ ul  { list-style: none; }
   .feature-list--grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
 }
 
+/* Section note: short centered heading + paragraph below a grid */
+.section-note {
+  max-width: 520px;
+  margin: 56px auto 0;
+  text-align: center;
+}
+.section-note h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
 /* ================================================================
    Q&A Section (always-visible questions and answers)
 ================================================================ */
