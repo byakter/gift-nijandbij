@@ -54,6 +54,61 @@
         "address": { "@type": "PostalAddress", "addressLocality": "Tel Aviv", "addressCountry": "IL" },
         "areaServed": "Israel",
         "sameAs": ["https://www.instagram.com/nijandbij"]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.nijandbij.com/gifts#service",
+        "url": "https://www.nijandbij.com/gifts",
+        "name": "Cocktail gift bank for employees",
+        "serviceType": "Employee gifts",
+        "description": "Cocktail gift bank for employees: load once, send via your portal all year. ₪175–195 per gift before VAT, free home delivery.",
+        "provider": { "@id": "https://www.nijandbij.com/#organization" },
+        "areaServed": "Israel",
+        "image": "https://www.nijandbij.com/assets/og-gifts.jpg",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Starter: 50 gift units",
+            "price": 195,
+            "priceCurrency": "ILS",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 195,
+              "priceCurrency": "ILS",
+              "valueAddedTaxIncluded": false,
+              "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitText": "gift unit" }
+            },
+            "eligibleQuantity": { "@type": "QuantitativeValue", "minValue": 50, "unitText": "gift units" }
+          },
+          {
+            "@type": "Offer",
+            "name": "Growth: 100 gift units",
+            "price": 185,
+            "priceCurrency": "ILS",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 185,
+              "priceCurrency": "ILS",
+              "valueAddedTaxIncluded": false,
+              "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitText": "gift unit" }
+            },
+            "eligibleQuantity": { "@type": "QuantitativeValue", "minValue": 100, "unitText": "gift units" }
+          },
+          {
+            "@type": "Offer",
+            "name": "Premium: 200 gift units",
+            "price": 175,
+            "priceCurrency": "ILS",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 175,
+              "priceCurrency": "ILS",
+              "valueAddedTaxIncluded": false,
+              "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitText": "gift unit" }
+            },
+            "eligibleQuantity": { "@type": "QuantitativeValue", "minValue": 200, "unitText": "gift units" }
+          }
+        ]
       }
     ]
   }
