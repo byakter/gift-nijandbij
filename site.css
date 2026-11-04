@@ -908,6 +908,138 @@ ul  { list-style: none; }
 }
 
 /* ================================================================
+   Forms: card, rows of fields, labels, inputs, error and success states.
+   Same values as the inline copies on bar and workshops (EN + HE); bar.html (EN) also
+   sets .form-row { align-items: end }, which the other copies don't, so it stays out of here.
+================================================================ */
+.contact-card {
+  background: var(--warm-white);
+  border-radius: 20px;
+  padding: clamp(28px, 4vw, 48px);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.92rem;
+  font-weight: 400;
+  padding: 13px 16px;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(90,122,101,0.4);
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A7A65' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-color: var(--cream);
+  padding-right: 40px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 3px rgba(74,128,96,0.1);
+}
+
+.form-group input.field-error,
+.form-group select.field-error {
+  border-color: #b83232;
+}
+
+.form-error-msg {
+  display: none;
+  font-size: 0.84rem;
+  color: #b83232;
+  background: rgba(184,50,50,0.06);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.form-success {
+  text-align: center;
+  padding: 40px 24px;
+}
+.form-success-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(45,92,63,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.form-success-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--green);
+  fill: none;
+}
+.form-success h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.form-success p {
+  font-size: 0.93rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ================================================================
    Shop: product sections with a centered header and a card grid
    (used by the Kits page; cards and order form are added below)
 ================================================================ */
@@ -1165,4 +1297,248 @@ ul  { list-style: none; }
 }
 @media (max-width: 640px) {
   .shop-grid--4 > * { flex-basis: 100%; }
+}
+
+/* Screen reader only text (live announcements, extra labels) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Order form: fields on the start side, sticky summary with the send buttons on the end side.
+   One column at 1020px and below: fields, then summary, then buttons. */
+.order-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 28px;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+  scroll-margin-top: 96px;
+}
+.order-side {
+  position: sticky;
+  top: 96px;
+}
+
+.order-block {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.order-block + .order-block {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+/* Floated so it renders as a normal heading inside the fieldset, not on its top border */
+.order-block-title {
+  float: inline-start;
+  width: 100%;
+  padding: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.form-hint {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Item row: product, size (bottles only), quantity, remove */
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.order-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 116px 92px 44px;
+  grid-template-areas: "product size qty remove";
+  gap: 10px;
+  align-items: end;
+  padding: 10px;
+  margin: 0 -10px;
+  border-radius: 12px;
+  border: 1.5px solid transparent;
+}
+.order-item-product { grid-area: product; min-width: 0; }
+.order-item-size    { grid-area: size; }
+.order-item-qty     { grid-area: qty; }
+.order-item-remove  { grid-area: remove; }
+.order-item:not(.has-size) .order-item-product { grid-column: product-start / size-end; }
+.order-item-size[hidden] { display: none; }
+/* One height for every control in a row (selects and inputs otherwise differ by a few px) */
+.order-item select,
+.order-item input { height: 48px; }
+
+.order-item-remove {
+  width: 44px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+/* RTL: dropdown arrow on the left, where the field ends */
+[dir="rtl"] .order-item select {
+  background-position: left 14px center;
+  padding-right: 16px;
+  padding-left: 40px;
+}
+
+.order-item-remove:hover { border-color: #b83232; color: #b83232; background: rgba(184,50,50,0.04); }
+.order-item-remove:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 2px; }
+.order-item-remove svg { width: 16px; height: 16px; }
+
+/* Brief highlight on the row that "Add to order" added or updated */
+.order-item.is-flash { animation: order-flash 1.8s var(--ease); }
+@keyframes order-flash {
+  0%, 35% { background: rgba(74,128,96,0.12); border-color: var(--green-mid); }
+  100%    { background: transparent; border-color: transparent; }
+}
+
+.order-add-item { align-self: flex-start; margin-top: 6px; }
+
+/* Delivery choice: two selectable options (native radios) */
+.order-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.order-choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 12px 16px;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.45;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+}
+.order-choice:hover { border-color: var(--green-mid); }
+.order-choice:has(input:checked) { border-color: var(--green); background: rgba(74,128,96,0.08); }
+.order-choice input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--green);
+  cursor: pointer;
+}
+.order-choice input:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 2px; }
+.order-address[hidden] { display: none; }
+
+/* Summary */
+.order-summary-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.order-summary-vat {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 4px 0 18px;
+}
+.order-empty {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+.order-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+.order-lines li,
+.order-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.45;
+}
+.order-line-amount,
+.order-total-row dd {
+  flex: none;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+.order-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.order-total-row--grand {
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.order-total-row--grand dd { font-size: 1.25rem; font-weight: 800; }
+.order-total-row .order-muted { font-weight: 500; color: var(--text-muted); }
+.order-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 16px 0 20px;
+}
+.order-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.order-actions .form-error-msg { margin-bottom: 4px; }
+/* Logos keep their direction in RTL (arrow icons in .btn are mirrored) */
+[dir="rtl"] .btn svg.no-flip { transform: none; }
+
+@media (max-width: 1020px) {
+  .order-layout { grid-template-columns: 1fr; max-width: 680px; }
+  .order-side { position: static; }
+}
+@media (max-width: 640px) {
+  .order-item {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px;
+    grid-template-areas:
+      "product product product"
+      "size    qty     remove";
+  }
+  .order-item:not(.has-size) .order-item-product { grid-column: 1 / -1; }
+  .order-item:not(.has-size) .order-item-qty { grid-column: size-start / qty-end; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .order-item.is-flash { animation-duration: 0.01s; background: rgba(74,128,96,0.12); }
 }
