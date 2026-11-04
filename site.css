@@ -1,4 +1,7 @@
-/* site.css: rules shared by every page. Page-specific rules stay in each page's inline <style>. */
+/* site.css: rules shared by every page, plus reusable building blocks any page can use
+   (section headings, centered hero, shop sections). Page-specific rules stay in each page's
+   inline <style>. Some older pages still carry inline copies of the shared blocks with the
+   same values; those copies are to be removed in a later cleanup. */
 
 /* ================================================================
    Variables & Reset
@@ -796,3 +799,130 @@ ul  { list-style: none; }
 .legal-body td { color: var(--text-mid); }
 .legal-body td:first-child { color: var(--text); font-weight: 500; }
 .legal-body tbody tr:last-child td { border-bottom: none; }
+
+/* ================================================================
+   Shared Page Blocks: section headings, full-width button, scroll
+   animations, centered hero. Same values as the inline copies on
+   index, gifts, bar and workshops (EN + HE) and the 404 pages.
+================================================================ */
+.section-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  background: rgba(74,128,96,0.1);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.18;
+}
+
+.section-sub {
+  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+  color: var(--text-muted);
+  line-height: 1.72;
+  max-width: 520px;
+  font-weight: 400;
+}
+
+.btn-full { width: 100%; justify-content: center; }
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.fade-up.visible { opacity: 1; transform: none; }
+
+.fade-up-d1 { transition-delay: 0.1s; }
+.fade-up-d2 { transition-delay: 0.2s; }
+.fade-up-d3 { transition-delay: 0.3s; }
+.fade-up-d4 { transition-delay: 0.4s; }
+
+/* Centered hero: h1, subtitle, row of buttons */
+.hero-home {
+  background: var(--warm-white);
+  padding: calc(72px + 100px) 0 clamp(72px, 10vw, 120px);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-home::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(74,128,96,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-home-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.hero-home h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.hero-home h1 .accent { color: var(--green); }
+
+.hero-home-sub {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 48px;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.hero-home-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .hero-home-ctas { flex-direction: column; align-items: center; }
+  .hero-home-ctas .btn { width: 100%; justify-content: center; max-width: 320px; }
+}
+
+/* ================================================================
+   Shop: product sections with a centered header and a card grid
+   (used by the Kits page; cards and order form are added below)
+================================================================ */
+.shop-section {
+  background: var(--cream);
+  padding: clamp(72px, 10vw, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+.shop-section--alt { background: var(--warm-white); }
+
+.shop-section-header {
+  text-align: center;
+  margin-bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
