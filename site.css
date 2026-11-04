@@ -1450,6 +1450,7 @@ ul  { list-style: none; }
   cursor: pointer;
 }
 .order-choice input:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 2px; }
+.order-choice.field-error { border-color: #b83232; }
 .order-address[hidden] { display: none; }
 
 /* Summary */
@@ -1522,6 +1523,14 @@ ul  { list-style: none; }
   gap: 10px;
 }
 .order-actions .form-error-msg { margin-bottom: 4px; }
+/* Shown in place of the form after sending by email */
+.order-success {
+  max-width: 640px;
+  margin: 0 auto;
+  scroll-margin-top: 96px;
+}
+.order-success h3:focus { outline: none; }
+
 /* Logos keep their direction in RTL (arrow icons in .btn are mirrored) */
 [dir="rtl"] .btn svg.no-flip { transform: none; }
 

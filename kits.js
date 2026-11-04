@@ -54,7 +54,26 @@
       sendEmail:      'Send by email',
       sendWhatsApp:   'Send via WhatsApp',
       announceAdded:  '{item} added to your order.',
-      announceQty:    '{item}: quantity is now {qty}.'
+      announceQty:    '{item}: quantity is now {qty}.',
+
+      /* Validation and sending */
+      errMissing:     'Please complete: {fields}.',
+      fieldNames:     { items: 'at least one item', name: 'full name', phone: 'phone', email: 'email',
+                        delivery: 'delivery method', address: 'delivery address' },
+      errPhone:       'Please enter a valid Israeli phone number, e.g. 050-123-4567.',
+      errEmail:       'Please enter a valid email address.',
+      errSend:        'Something went wrong. Please try again, or send your order via WhatsApp instead.',
+      sending:        'Sending…',
+      successTitle:   'Order received!',
+      successText:    'Thanks! We\'ve received your order and will send you an invoice with a secure payment link.',
+
+      /* WhatsApp message */
+      waGreeting:     'Hi NIJ & BIJ! I\'d like to place an order:',
+      waItems:        'Items',
+      waDelivery:     'Delivery',
+      waDetails:      'My details',
+      waShipping:     'Shipping anywhere in Israel',
+      waPickup:       'Self pickup from Tel Giborim 5, Tel Aviv'
     }
   };
 
@@ -297,16 +316,31 @@
         '</div>' +
       '</div>' +
       '<p class="visually-hidden" id="ko-status" aria-live="polite"></p>' +
-    '</form>';
+      /* Formspree honeypot: bots fill it, people never see it */
+      '<div class="visually-hidden" aria-hidden="true">' +
+        '<input type="text" id="ko-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">' +
+      '</div>' +
+    '</form>' +
+    '<div class="contact-card form-success order-success" id="ko-success" style="display: none" role="status" aria-live="polite">' +
+      '<div class="form-success-icon" aria-hidden="true">' +
+        '<svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' +
+      '</div>' +
+      '<h3 id="ko-success-title" tabindex="-1">' + esc(t.successTitle) + '</h3>' +
+      '<p>' + esc(t.successText) + '</p>' +
+    '</div>';
 
   var form         = document.getElementById('kits-order-form');
   var itemsEl      = document.getElementById('ko-items');
   var summaryEl    = document.getElementById('ko-summary');
   var statusEl     = document.getElementById('ko-status');
+  var errorEl      = document.getElementById('ko-error');
+  var successEl    = document.getElementById('ko-success');
   var addressGroup = document.getElementById('ko-address-group');
   var addressInput = document.getElementById('ko-address');
+  var emailBtn     = document.getElementById('ko-send-email');
+  var whatsAppBtn  = document.getElementById('ko-send-whatsapp');
 
-  /* Sending is added in Phase 5; until then the form never submits */
+  /* Sending happens through the two buttons; Enter in a field never submits the form */
   form.addEventListener('submit', function (e) { e.preventDefault(); });
 
   /* ── Item rows ── */
@@ -433,6 +467,10 @@
 
   /* Same product and size: quantity + 1. Otherwise fill the first empty row, or add a row. */
   function addToOrder(key, size) {
+    if (sent) {
+      successEl.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
     var list = rows();
     var row = list.filter(function (r) { return rowKey(r) === key && rowSize(r) === size; })[0];
     var msg;
@@ -477,30 +515,215 @@
   function totalRow(label, value, modifier) {
     return '<div class="order-total-row' + (modifier ? ' ' + modifier : '') + '"><dt>' + label + '</dt><dd>' + value + '</dd></div>';
   }
-  function updateSummary() {
-    var lines = '', subtotal = 0;
+  /* The order as it stands: rows with a product (empty rows are ignored) and the totals */
+  function orderData() {
+    var items = [], subtotal = 0;
     rows().forEach(function (row) {
       var key = rowKey(row);
       if (!catalog[key]) return;
       var size = rowSize(row), qty = rowQty(row);
       var amount = unitPrice(key, size) * qty;
       subtotal += amount;
-      lines += '<li><span>' + esc(itemLabel(key, size)) + ' × ' + qty + '</span><span class="order-line-amount">' + money(amount) + '</span></li>';
+      items.push({ key: key, name: catalog[key].product.name, size: size, qty: qty, amount: amount });
     });
-    if (!lines) {
-      summaryEl.innerHTML = '<p class="order-empty">' + esc(t.noItems) + '</p>';
-      return;
-    }
     var delivery = deliveryValue();
     var shipping = delivery === 'shipping' ? data.shipping : 0;
-    summaryEl.innerHTML =
-      '<ul class="order-lines">' + lines + '</ul>' +
-      '<dl class="order-totals">' +
-        totalRow(esc(t.subtotal), money(subtotal)) +
-        totalRow(esc(t.shippingLine), delivery ? money(shipping) : '<span class="order-muted">' + esc(t.notSelected) + '</span>') +
-        totalRow(esc(t.total) + ' <span class="order-muted">' + esc(t.vat) + '</span>', money(subtotal + shipping), 'order-total-row--grand') +
-      '</dl>';
+    return { items: items, subtotal: subtotal, delivery: delivery, shipping: shipping, total: subtotal + shipping };
   }
+
+  function updateSummary() {
+    var o = orderData();
+    if (!o.items.length) {
+      summaryEl.innerHTML = '<p class="order-empty">' + esc(t.noItems) + '</p>';
+    } else {
+      summaryEl.innerHTML =
+        '<ul class="order-lines">' + o.items.map(function (i) {
+          return '<li><span>' + esc(itemLabel(i.key, i.size)) + ' × ' + i.qty + '</span><span class="order-line-amount">' + money(i.amount) + '</span></li>';
+        }).join('') + '</ul>' +
+        '<dl class="order-totals">' +
+          totalRow(esc(t.subtotal), money(o.subtotal)) +
+          totalRow(esc(t.shippingLine), o.delivery ? money(o.shipping) : '<span class="order-muted">' + esc(t.notSelected) + '</span>') +
+          totalRow(esc(t.total) + ' <span class="order-muted">' + esc(t.vat) + '</span>', money(o.total), 'order-total-row--grand') +
+        '</dl>';
+    }
+    recheck();
+  }
+
+  /* ── Validation ── */
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  /* Israeli numbers with or without spaces, dashes, dots, brackets or +972/00972:
+     mobile and 07x (0 + 9 digits) and landlines 02/03/04/08/09 (0 + 8 digits) */
+  function validPhone(value) {
+    var s = value.replace(/[\s\-().]/g, '');
+    var intl = /^(?:\+|00)?972/;
+    if (intl.test(s)) s = '0' + s.replace(intl, '').replace(/^0/, '');
+    return /^0(?:[23489]\d{7}|[57]\d{8})$/.test(s);
+  }
+  function val(id) { return document.getElementById(id).value.trim(); }
+
+  /* In form order. state: '' (fine), 'missing' or 'invalid'. Email is required only for sending by
+     email; if it is filled in, it must look valid for both methods. */
+  function checks(mode) {
+    var productSelects = rows().map(function (r) { return parts(r).product; });
+    var choices = [].slice.call(form.querySelectorAll('input[name="delivery"]'));
+    var phone = val('ko-phone'), email = val('ko-email'), delivery = deliveryValue();
+    function one(id, state) { var f = document.getElementById(id); return { marks: [f], focus: f, state: state }; }
+    var list = [
+      { marks: productSelects, focus: productSelects[0], state: orderData().items.length ? '' : 'missing' },
+      one('ko-name', val('ko-name') ? '' : 'missing'),
+      one('ko-phone', !phone ? 'missing' : validPhone(phone) ? '' : 'invalid'),
+      one('ko-email', email ? (EMAIL_RE.test(email) ? '' : 'invalid') : (mode === 'email' ? 'missing' : '')),
+      { marks: choices.map(function (c) { return c.closest('.order-choice'); }), focus: choices[0], state: delivery ? '' : 'missing' },
+      one('ko-address', delivery === 'shipping' && !val('ko-address') ? 'missing' : '')
+    ];
+    ['items', 'name', 'phone', 'email', 'delivery', 'address'].forEach(function (key, i) { list[i].key = key; });
+    return list;
+  }
+
+  function showErrors(bad) {
+    var missing = bad.filter(function (c) { return c.state === 'missing'; })
+                     .map(function (c) { return t.fieldNames[c.key]; });
+    var msgs = missing.length ? [fill(t.errMissing, { fields: missing.join(', ') })] : [];
+    bad.forEach(function (c) { if (c.state === 'invalid') msgs.push(c.key === 'phone' ? t.errPhone : t.errEmail); });
+    errorEl.textContent = msgs.join(' ');
+    errorEl.style.display = msgs.length ? 'block' : 'none';
+  }
+
+  /* Marks every problem, shows what's missing, then scrolls to and focuses the first one */
+  var lastMode = '';
+  function validate(mode) {
+    lastMode = mode;
+    var list = checks(mode);
+    var bad = list.filter(function (c) { return c.state; });
+    list.forEach(function (c) {
+      c.marks.forEach(function (m) { m.classList.toggle('field-error', !!c.state); });
+    });
+    showErrors(bad);
+    if (bad.length) {
+      bad[0].focus.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      bad[0].focus.focus({ preventScroll: true });
+    }
+    return !bad.length;
+  }
+
+  /* After a failed attempt, each error clears as soon as it's fixed (no new errors while typing) */
+  function recheck() {
+    if (!lastMode) return;
+    var still = checks(lastMode).filter(function (c) {
+      var marked = c.marks.some(function (m) { return m.classList.contains('field-error'); });
+      if (!c.state) c.marks.forEach(function (m) { m.classList.remove('field-error'); });
+      return c.state && marked;
+    });
+    showErrors(still);
+  }
+  form.addEventListener('input', recheck);
+  form.addEventListener('change', recheck);
+
+  /* ── Tracking (does nothing when gtag or fbq is blocked or missing) ── */
+  function track(method, total) {
+    var params = { value: total, currency: 'ILS', method: method };
+    try { if (typeof gtag === 'function') gtag('event', 'kits_order_request', params); } catch (_) {}
+    try { if (typeof fbq === 'function') fbq('trackCustom', 'KitsOrderRequest', params); } catch (_) {}
+  }
+
+  /* ── Send by email (Formspree) ── */
+  var FORMSPREE_URL = 'https://formspree.io/f/mqevnedo';
+
+  /* Field names and values in English on both language versions, so every order reads the same */
+  function emailPayload(o) {
+    var p = {
+      _subject: 'KITS order – ' + val('ko-name'),
+      name:     val('ko-name'),
+      phone:    val('ko-phone'),
+      email:    val('ko-email'),
+      company:  val('ko-company'),
+      delivery: o.delivery === 'shipping' ? 'Shipping anywhere in Israel' : 'Self pickup (Tel Giborim 5, Tel Aviv)'
+    };
+    if (o.delivery === 'shipping') p.address = val('ko-address');
+    p.items = o.items.map(function (i) {
+      return i.name + (i.size ? ', ' + i.size : '') + ' × ' + i.qty + ' = ' + i.amount + ' ILS';
+    }).join('\n');
+    p.subtotal        = o.subtotal + ' ILS';
+    p.shipping        = o.shipping + ' ILS';
+    p.estimated_total = o.total + ' ILS (incl. VAT)';
+    p.notes           = val('ko-notes');
+    p.language        = lang;
+    /* Hidden visit-source fields (from visit-source.js) */
+    [].forEach.call(form.querySelectorAll('input[type="hidden"]'), function (h) {
+      if (!(h.name in p)) p[h.name] = h.value;
+    });
+    p._gotcha = document.getElementById('ko-gotcha').value;
+    return p;
+  }
+
+  var sending = false, sent = false;
+  function setBusy(busy) {
+    sending = busy;
+    emailBtn.disabled = whatsAppBtn.disabled = busy;
+    emailBtn.textContent = busy ? t.sending : t.sendEmail;
+  }
+
+  emailBtn.addEventListener('click', function () {
+    if (sending || !validate('email')) return;
+    var o = orderData();
+    setBusy(true);
+    fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(emailPayload(o))
+    })
+      .then(function (res) {
+        return res.json().then(function (d) { return { ok: res.ok, data: d }; });
+      })
+      .then(function (r) {
+        if (!r.ok) throw new Error('submission_failed');
+        sent = true;
+        form.style.display = 'none';
+        successEl.style.display = '';
+        successEl.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        document.getElementById('ko-success-title').focus({ preventScroll: true });
+        track('email', o.total);
+      })
+      .catch(function () {
+        if (sent) return;
+        errorEl.textContent = t.errSend;
+        errorEl.style.display = 'block';
+        setBusy(false);
+      });
+  });
+
+  /* ── Send via WhatsApp ── */
+  var WHATSAPP_NUMBER = '972508989990';
+
+  /* Page language, one detail per line, *bold* headings (WhatsApp formatting) */
+  function whatsAppMessage(o) {
+    var lines = [t.waGreeting, '', '*' + t.waItems + '*'];
+    o.items.forEach(function (i) {
+      lines.push('• ' + i.name + (i.size ? ' (' + (t.sizes[i.size] || i.size) + ')' : '') + ' × ' + i.qty + ' – ' + money(i.amount));
+    });
+    lines.push('',
+      t.subtotal + ': ' + money(o.subtotal),
+      t.shippingLine + ': ' + money(o.shipping),
+      '*' + t.total + ': ' + money(o.total) + '* (' + t.vat + ')',
+      '', '*' + t.waDelivery + '*',
+      o.delivery === 'shipping' ? t.waShipping : t.waPickup);
+    if (o.delivery === 'shipping') lines.push(t.address + ': ' + val('ko-address'));
+    lines.push('', '*' + t.waDetails + '*',
+      t.fullName + ': ' + val('ko-name'),
+      t.phone + ': ' + val('ko-phone'));
+    if (val('ko-email'))   lines.push(t.email + ': ' + val('ko-email'));
+    if (val('ko-company')) lines.push(t.company + ': ' + val('ko-company'));
+    if (val('ko-notes'))   lines.push(t.notes + ': ' + val('ko-notes'));
+    return lines.join('\n');
+  }
+
+  /* Opens WhatsApp in a new tab; the form stays as it is, since the message may not be sent */
+  whatsAppBtn.addEventListener('click', function () {
+    if (sending || !validate('whatsapp')) return;
+    var o = orderData();
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(whatsAppMessage(o)), '_blank', 'noopener');
+    track('whatsapp', o.total);
+  });
 
   addRow();
   updateSummary();

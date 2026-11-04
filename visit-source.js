@@ -11,7 +11,7 @@
   var MAX_AGE  = 30 * 24 * 60 * 60 * 1000;
   var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
   var FIELDS   = UTM_KEYS.concat(['landing_page', 'referrer']);
-  var FORM_IDS = ['lead-form', 'bar-quote-form', 'workshop-quote-form'];
+  var FORM_IDS = ['lead-form', 'bar-quote-form', 'workshop-quote-form', 'kits-order-form'];
 
   /* ── Current visit ────────────────────────────────────────────── */
   var params = new URLSearchParams(window.location.search);
