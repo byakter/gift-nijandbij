@@ -926,3 +926,167 @@ ul  { list-style: none; }
   align-items: center;
   gap: 12px;
 }
+
+/* Product card grid: 3 columns, 2 at 980px and below, 1 at 640px and below */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Product card: image, name, description, contents list, price, full-width button */
+.shop-card {
+  background: var(--warm-white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(213,205,190,0.6);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.shop-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
+
+.shop-card-img {
+  height: 240px;
+  background: var(--warm-light);
+  overflow: hidden;
+  position: relative;
+}
+.shop-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.shop-card:hover .shop-card-img img { transform: scale(1.04); }
+
+/* Shown instead of the photo when the image file is missing */
+.shop-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shop-card-placeholder svg {
+  width: 48px;
+  height: 48px;
+  fill: none;
+  stroke: var(--green-mid);
+  opacity: 0.45;
+}
+
+.shop-card-badge {
+  position: absolute;
+  top: 14px;
+  inset-inline-start: 14px;
+  background: var(--text);
+  color: var(--cream);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+}
+
+.shop-card-body {
+  padding: 24px 22px 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-card-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.shop-card-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.shop-card-includes-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+/* flex: 1 pushes price and button to the bottom, so buttons line up across a row */
+.shop-card-includes {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+  flex: 1;
+}
+.shop-card-includes li {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+  padding-inline-start: 18px;
+  position: relative;
+}
+.shop-card-includes li::before {
+  content: '✳︎';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 4px;
+  color: var(--green-mid);
+  font-size: 0.6rem;
+}
+
+.shop-card-price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: auto;
+  margin-bottom: 16px;
+}
+.shop-card-price-amount {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+.shop-card-price-currency {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.shop-card-price-vat {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-inline-start: 4px;
+}
+
+/* Out of stock: dimmed photo, disabled button */
+.shop-card.is-unavailable .shop-card-img img,
+.shop-card.is-unavailable .shop-card-placeholder { opacity: 0.55; }
+.shop-card .btn:disabled {
+  background: var(--warm-light);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 980px) {
+  .shop-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .shop-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+}
