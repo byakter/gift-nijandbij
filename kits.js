@@ -74,6 +74,69 @@
       waDetails:      'My details',
       waShipping:     'Shipping anywhere in Israel',
       waPickup:       'Self pickup from Tel Giborim 5, Tel Aviv'
+    },
+    he: {
+      includes:   'המארז כולל:',
+      vat:        'כולל מע״מ',
+      addToOrder: 'הוסיפו להזמנה',
+      outOfStock: 'אזל מהמלאי',
+      size:       'גודל',
+      sizes:      { '200ml': '200\u00A0מ״ל', '500ml': '500\u00A0מ״ל', '1000ml': '1000\u00A0מ״ל' },  /* no-break space */
+
+      /* Order form */
+      itemsTitle:     'הפריטים שלכם',
+      product:        'מוצר',
+      chooseProduct:  'בחרו מוצר',
+      groupBoxes:     'מארזים',
+      groupBottles:   'בקבוקים',
+      quantity:       'כמות',
+      removeItem:     'הסירו את הפריט',
+      addItem:        'הוסיפו פריט נוסף',
+      detailsTitle:   'הפרטים שלכם',
+      fullName:       'שם מלא',
+      phone:          'טלפון',
+      email:          'אימייל',
+      emailHint:      '(חובה לשליחה במייל)',
+      company:        'חברה',
+      notes:          'הערות',
+      optional:       '(לא חובה)',
+      notesHint:      'משהו נוסף שכדאי שנדע…',
+      deliveryTitle:  'משלוח או איסוף',
+      shipping:       'משלוח לכל מקום בארץ - {price} ₪',
+      pickup:         'איסוף עצמי מתל גיבורים 5, תל אביב, בתיאום מראש',
+      address:        'כתובת למשלוח',
+      addressHint:    'רחוב, מספר, עיר',
+      summaryTitle:   'סיכום ההזמנה',
+      summaryVat:     'כל המחירים כוללים מע״מ',
+      noItems:        'עדיין לא נבחרו פריטים',
+      subtotal:       'סכום הפריטים',
+      shippingLine:   'משלוח',
+      notSelected:    'עדיין לא נבחר',
+      total:          'סה״כ משוער',
+      summaryNote:    'זו הערכה בלבד. אחרי שנקבל את ההזמנה נשלח לכם חשבונית עם קישור לתשלום מאובטח.',
+      sendEmail:      'שלחו במייל',
+      sendWhatsApp:   'שלחו בוואטסאפ',
+      announceAdded:  '{item} נוסף להזמנה.',
+      announceQty:    '{item}: הכמות עודכנה ל-{qty}.',
+
+      /* Validation and sending */
+      errMissing:     'אנא השלימו: {fields}.',
+      fieldNames:     { items: 'לפחות פריט אחד', name: 'שם מלא', phone: 'טלפון', email: 'אימייל',
+                        delivery: 'משלוח או איסוף', address: 'כתובת למשלוח' },
+      errPhone:       'אנא הזינו מספר טלפון ישראלי תקין, למשל 050-123-4567.',
+      errEmail:       'אנא הזינו כתובת אימייל תקינה.',
+      errSend:        'משהו השתבש. נסו שוב, או שלחו את ההזמנה בוואטסאפ.',
+      sending:        'שולח…',
+      successTitle:   'ההזמנה התקבלה!',
+      successText:    'תודה! קיבלנו את ההזמנה שלכם, ונשלח לכם חשבונית עם קישור לתשלום מאובטח.',
+
+      /* WhatsApp message */
+      waGreeting:     'היי NIJ & BIJ! אשמח להזמין:',
+      waItems:        'פריטים',
+      waDelivery:     'משלוח או איסוף',
+      waDetails:      'הפרטים שלי',
+      waShipping:     'משלוח לכל מקום בארץ',
+      waPickup:       'איסוף עצמי מתל גיבורים 5, תל אביב'
     }
   };
 
@@ -84,6 +147,19 @@
   /* Picks the page language from an { en, he } field, falling back to English */
   function local(field) {
     return field ? (field[lang] || field.en) : '';
+  }
+
+  /* Product names are English: on the RTL page they are isolated so that trailing punctuation,
+     numbers, ₪ and × around them keep the right order. <bdi> in HTML; direction marks in plain
+     text (dropdown options, announcements, the WhatsApp message). */
+  var rtl = lang === 'he';
+  var LRM = '‎', RLM = '‏';
+  function nameText(name) { return rtl ? LRM + name + LRM : name; }
+  function nameNode(name) {
+    var bdi = document.createElement('bdi');
+    bdi.dir = 'ltr';
+    bdi.textContent = name;
+    return bdi;
   }
 
   /* ── Helpers ──────────────────────────────────────────────────── */
@@ -152,7 +228,7 @@
     art.setAttribute('aria-label', product.name);
     art.appendChild(cardImage(product));
     var body = el('div', 'shop-card-body');
-    body.appendChild(el('h3', 'shop-card-name', product.name));
+    body.appendChild(el('h3', 'shop-card-name')).appendChild(nameNode(product.name));
     body.appendChild(el('p', 'shop-card-desc', local(product.description)));
     art.appendChild(body);
     return { node: art, body: body };
@@ -245,9 +321,12 @@
     if (!c) return 0;
     return c.kind === 'bottle' ? (c.product.prices[size] || 0) : c.product.price;
   }
-  function itemLabel(key, size) {
+  /* "Name · size" as plain text, or as HTML (escaped, name in <bdi>) */
+  function itemLabel(key, size, html) {
     var c = catalog[key];
-    return c.product.name + (c.kind === 'bottle' ? ' · ' + (t.sizes[size] || size) : '');
+    var sizeText = c.kind === 'bottle' ? ' · ' + (t.sizes[size] || size) : '';
+    return html ? '<bdi dir="ltr">' + esc(c.product.name) + '</bdi>' + esc(sizeText)
+                : nameText(c.product.name) + sizeText;
   }
 
   var REQUIRED = ' <span aria-hidden="true">*</span>';
@@ -347,7 +426,7 @@
   /* Product list: in-stock products only, grouped, names in English */
   function optionGroup(label, kind, products) {
     var opts = products.filter(function (p) { return p.available !== false; }).map(function (p) {
-      return '<option value="' + kind + ':' + esc(p.id) + '">' + esc(p.name) + '</option>';
+      return '<option value="' + kind + ':' + esc(p.id) + '">' + esc(nameText(p.name)) + '</option>';
     }).join('');
     return opts ? '<optgroup label="' + esc(label) + '">' + opts + '</optgroup>' : '';
   }
@@ -538,7 +617,7 @@
     } else {
       summaryEl.innerHTML =
         '<ul class="order-lines">' + o.items.map(function (i) {
-          return '<li><span>' + esc(itemLabel(i.key, i.size)) + ' × ' + i.qty + '</span><span class="order-line-amount">' + money(i.amount) + '</span></li>';
+          return '<li><span>' + itemLabel(i.key, i.size, true) + ' ×&nbsp;' + i.qty + '</span><span class="order-line-amount">' + money(i.amount) + '</span></li>';
         }).join('') + '</ul>' +
         '<dl class="order-totals">' +
           totalRow(esc(t.subtotal), money(o.subtotal)) +
@@ -695,11 +774,14 @@
   /* ── Send via WhatsApp ── */
   var WHATSAPP_NUMBER = '972508989990';
 
-  /* Page language, one detail per line, *bold* headings (WhatsApp formatting) */
+  /* Page language, one detail per line, *bold* headings (WhatsApp formatting). In Hebrew, item
+     lines start with an English name, so they get an RLM to read right to left, and the name is
+     closed with an RLM so the size, quantity and price after it stay in Hebrew order. */
   function whatsAppMessage(o) {
     var lines = [t.waGreeting, '', '*' + t.waItems + '*'];
     o.items.forEach(function (i) {
-      lines.push('• ' + i.name + (i.size ? ' (' + (t.sizes[i.size] || i.size) + ')' : '') + ' × ' + i.qty + ' – ' + money(i.amount));
+      lines.push((rtl ? RLM : '') + '• ' + nameText(i.name) + (rtl ? RLM : '') +
+        (i.size ? ' (' + (t.sizes[i.size] || i.size) + ')' : '') + ' × ' + i.qty + ' – ' + money(i.amount));
     });
     lines.push('',
       t.subtotal + ': ' + money(o.subtotal),
