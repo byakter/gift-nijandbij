@@ -229,8 +229,8 @@ ul  { list-style: none; }
   border-bottom: 1px solid rgba(213,205,190,0.35);
 }
 
-/* Hamburger up to 1100px: the desktop row (widest: gifts pages) needs ~810px today and
-   ~950px with one more link, so it only fits from ~1070px with a scrollbar. */
+/* Hamburger up to 1100px: the desktop row (5 links; widest: he/gifts, with the longest button)
+   measured ~880px in Nov 2026, so at 1101px about 110px are left. */
 @media (max-width: 1100px) {
   .nav-inner > .nav-links { display: none; }
   .nav-inner > .lang-switch { display: none; }
@@ -1550,4 +1550,36 @@ ul  { list-style: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .order-item.is-flash { animation-duration: 0.01s; background: rgba(74,128,96,0.12); }
+}
+
+/* ================================================================
+   Service card band: a full-width, horizontal .service-card (image on the
+   start side, text on the end side), stacked like a normal card at 860px
+   and below. The base .service-card styles are inline on index (EN + HE).
+================================================================ */
+.service-card.service-card--band {
+  flex-direction: row;
+  margin-top: 24px;
+}
+.service-card--band .service-card-img {
+  flex: 0 0 42%;
+  height: auto;
+  min-height: 260px;
+}
+.service-card--band .service-card-body {
+  justify-content: center;
+  padding: 40px 44px;
+}
+.service-card--band .service-card-body h3 { font-size: 1.5rem; }
+.service-card--band .service-card-body p { flex: 0; max-width: 520px; }
+
+@media (max-width: 860px) {
+  .service-card.service-card--band {
+    flex-direction: column;
+    max-width: 480px;
+    margin: 24px auto 0;
+  }
+  .service-card--band .service-card-img { flex: none; height: 200px; min-height: 0; }
+  .service-card--band .service-card-body { padding: 28px 26px 32px; }
+  .service-card--band .service-card-body h3 { font-size: 1.2rem; }
 }
