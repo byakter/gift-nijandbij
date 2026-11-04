@@ -16,9 +16,14 @@
       includes:   'Box includes:',
       vat:        'incl. VAT',
       addToOrder: 'Add to order',
-      outOfStock: 'Out of stock'
+      outOfStock: 'Out of stock',
+      size:       'Size',
+      sizes:      { '200ml': '200ml', '500ml': '500ml', '1000ml': '1000ml' }
     }
   };
+
+  /* Bottle sizes in display order; the first one is selected by default */
+  var SIZES = ['200ml', '500ml', '1000ml'];
   var t = TEXT[lang] || TEXT.en;
 
   /* Picks the page language from an { en, he } field, falling back to English */
@@ -57,6 +62,7 @@
       img.width = 600;
       img.height = 480;
       img.loading = 'lazy';
+      img.addEventListener('load', function () { img.classList.add('is-loaded'); });
       img.addEventListener('error', function () { wrap.replaceChild(placeholder(), img); });
       wrap.appendChild(img);
     } else {
@@ -84,8 +90,9 @@
   }
 
   /* Card shell shared by boxes and bottles; staggered fade-in per column */
-  function card(product, index) {
-    var art = el('article', 'shop-card fade-up' + (index % 3 ? ' fade-up-d' + (index % 3) : ''));
+  function card(product, index, columns) {
+    var col = index % columns;
+    var art = el('article', 'shop-card fade-up' + (col ? ' fade-up-d' + col : ''));
     if (product.available === false) art.classList.add('is-unavailable');
     art.setAttribute('aria-label', product.name);
     art.appendChild(cardImage(product));
@@ -98,7 +105,7 @@
 
   /* ── Gift boxes ───────────────────────────────────────────────── */
   function boxCard(box, index) {
-    var c = card(box, index);
+    var c = card(box, index, 3);
     var items = local(box.contents) || [];
     if (items.length) {
       c.body.appendChild(el('p', 'shop-card-includes-label', t.includes));
@@ -114,5 +121,49 @@
   var boxesGrid = document.getElementById('kits-boxes');
   if (boxesGrid) {
     (data.boxes || []).forEach(function (box, i) { boxesGrid.appendChild(boxCard(box, i)); });
+  }
+
+  /* ── Bottles ──────────────────────────────────────────────────── */
+  /* Size selector: a radio group; changing the size updates the price and the button's data-size */
+  function sizeSelector(bottle, sizes, onChange) {
+    var group = el('div', 'shop-sizes');
+    group.setAttribute('role', 'radiogroup');
+    group.setAttribute('aria-label', t.size + ', ' + bottle.name);
+    sizes.forEach(function (size, i) {
+      var label = el('label', 'shop-size');
+      var input = el('input');
+      input.type = 'radio';
+      input.name = 'size-' + bottle.id;
+      input.value = size;
+      input.checked = i === 0;
+      input.disabled = bottle.available === false;
+      input.addEventListener('change', function () { if (input.checked) onChange(size); });
+      label.appendChild(input);
+      label.appendChild(el('span', null, t.sizes[size] || size));
+      group.appendChild(label);
+    });
+    return group;
+  }
+
+  function bottleCard(bottle, index) {
+    var c = card(bottle, index, 4);
+    var prices = bottle.prices || {};
+    var sizes = SIZES.filter(function (s) { return prices[s] != null; });
+    var price = priceLine(prices[sizes[0]]);
+    price.setAttribute('aria-live', 'polite');
+    var btn = addButton('bottle', bottle);
+    btn.setAttribute('data-size', sizes[0]);
+    c.body.appendChild(sizeSelector(bottle, sizes, function (size) {
+      price.querySelector('.shop-card-price-amount').textContent = String(prices[size]);
+      btn.setAttribute('data-size', size);
+    }));
+    c.body.appendChild(price);
+    c.body.appendChild(btn);
+    return c.node;
+  }
+
+  var bottlesGrid = document.getElementById('kits-bottles');
+  if (bottlesGrid) {
+    (data.bottles || []).forEach(function (bottle, i) { bottlesGrid.appendChild(bottleCard(bottle, i)); });
   }
 })();
