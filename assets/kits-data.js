@@ -3,6 +3,8 @@
    HOW TO EDIT
    - Every value marked PLACEHOLDER is a stand-in. Replace it with the real text, price or file name.
    - Prices are whole shekels (ILS) and include VAT. Write numbers only, no ₪ sign: 149, not "149₪".
+   - tagline (optional, bottles) is a short line shown under the name, with "en" and "he"
+     versions; description then holds the ingredients. Leave tagline out to show no line.
    - name stays in English on both language versions. description and contents have an
      "en" and a "he" version: fill in both.
    - contents is a list: one item per line, in quotes, separated by commas.
@@ -122,80 +124,108 @@ window.KITS_DATA = {
   /* ── Bottles (7 flavors, each in 200ml / 500ml / 1000ml) ─────── */
   bottles: [
     {
-      id: 'bottle-1',
-      name: 'PLACEHOLDER Flavor 1',
-      description: {
-        en: 'PLACEHOLDER: short description of the flavor.',
-        he: 'PLACEHOLDER: תיאור קצר של הטעם.'
+      id: 'flora',
+      name: 'Flora',
+      tagline: {
+        en: 'Tropical and bright',
+        he: 'טרופי ורענן'
       },
-      prices: { '200ml': 40, '500ml': 80, '1000ml': 140 },
-      image: 'kit-bottle-1.jpg',
+      description: {
+        en: 'Bacardi, Cointreau, pineapple, passion fruit syrup and lemon',
+        he: 'בקרדי, קוואנטרו, אננס, סירופ פסיפלורה ולימון'
+      },
+      prices: { '200ml': 65, '500ml': 150, '1000ml': 240 },
+      image: 'kit-bottle-flora.jpg',
       available: true
     },
     {
-      id: 'bottle-2',
-      name: 'PLACEHOLDER Flavor 2',
-      description: {
-        en: 'PLACEHOLDER: short description of the flavor.',
-        he: 'PLACEHOLDER: תיאור קצר של הטעם.'
+      id: 'basil-smash',
+      name: 'Basil Smash',
+      tagline: {
+        en: 'Fresh and herbal',
+        he: 'רענן ועשבוני'
       },
-      prices: { '200ml': 42, '500ml': 82, '1000ml': 142 },
-      image: 'kit-bottle-2.jpg',
+      description: {
+        en: 'Gin, basil, lemon and simple syrup',
+        he: "ג'ין, בזיליקום, לימון ומי סוכר"
+      },
+      prices: { '200ml': 65, '500ml': 150, '1000ml': 240 },
+      image: 'kit-bottle-basil-smash.jpg',
       available: true
     },
     {
-      id: 'bottle-3',
-      name: 'PLACEHOLDER Flavor 3',
-      description: {
-        en: 'PLACEHOLDER: short description of the flavor.',
-        he: 'PLACEHOLDER: תיאור קצר של הטעם.'
+      id: 'margarita',
+      name: 'Margarita',
+      tagline: {
+        en: 'Classic and zesty',
+        he: 'קלאסי וחמצמץ'
       },
-      prices: { '200ml': 44, '500ml': 84, '1000ml': 144 },
-      image: 'kit-bottle-3.jpg',
+      description: {
+        en: 'Patrón tequila, Cointreau and lemon',
+        he: 'טקילה פטרון, קוואנטרו ולימון'
+      },
+      prices: { '200ml': 70, '500ml': 160, '1000ml': 250 },
+      image: 'kit-bottle-margarita.jpg',
       available: true
     },
     {
-      id: 'bottle-4',
-      name: 'PLACEHOLDER Flavor 4',
-      description: {
-        en: 'PLACEHOLDER: short description of the flavor.',
-        he: 'PLACEHOLDER: תיאור קצר של הטעם.'
+      id: 'negroninio',
+      name: 'Negroninio',
+      tagline: {
+        en: 'Light and bittersweet',
+        he: 'קליל ומריר-מתוק'
       },
-      prices: { '200ml': 46, '500ml': 86, '1000ml': 146 },
-      image: 'kit-bottle-4.jpg',
+      description: {
+        en: 'Gin, Aperol and Lillet',
+        he: "ג'ין, אפרול ולילט"
+      },
+      prices: { '200ml': 70, '500ml': 160, '1000ml': 250 },
+      image: 'kit-bottle-negroninio.jpg',
       available: true
     },
     {
-      id: 'bottle-5',
-      name: 'PLACEHOLDER Flavor 5',
-      description: {
-        en: 'PLACEHOLDER: short description of the flavor.',
-        he: 'PLACEHOLDER: תיאור קצר של הטעם.'
+      id: 'jasmine',
+      name: 'Jasmine',
+      tagline: {
+        en: 'Citrusy and elegant',
+        he: 'הדרי ואלגנטי'
       },
-      prices: { '200ml': 48, '500ml': 88, '1000ml': 148 },
-      image: 'kit-bottle-5.jpg',
+      description: {
+        en: 'Gin, Campari, Cointreau, lemon and simple syrup',
+        he: "ג'ין, קמפרי, קוואנטרו, לימון ומי סוכר"
+      },
+      prices: { '200ml': 65, '500ml': 150, '1000ml': 240 },
+      image: 'kit-bottle-jasmine.jpg',
       available: true
     },
     {
-      id: 'bottle-6',
-      name: 'PLACEHOLDER Flavor 6',
-      description: {
-        en: 'PLACEHOLDER: short description of the flavor.',
-        he: 'PLACEHOLDER: תיאור קצר של הטעם.'
+      id: 'negroni',
+      name: 'Negroni',
+      tagline: {
+        en: 'Bold and bitter',
+        he: 'עוצמתי ומריר'
       },
-      prices: { '200ml': 50, '500ml': 90, '1000ml': 150 },
-      image: 'kit-bottle-6.jpg',
+      description: {
+        en: 'Gin, Campari and Martini Rosso',
+        he: "ג'ין, קמפרי ומרטיני רוסו"
+      },
+      prices: { '200ml': 65, '500ml': 150, '1000ml': 240 },
+      image: 'kit-bottle-negroni.jpg',
       available: true
     },
     {
-      id: 'bottle-7',
-      name: 'PLACEHOLDER Flavor 7',
-      description: {
-        en: 'PLACEHOLDER: short description of the flavor.',
-        he: 'PLACEHOLDER: תיאור קצר של הטעם.'
+      id: 'honey-bunny',
+      name: 'Honey Bunny',
+      tagline: {
+        en: 'Warm and smooth',
+        he: 'חמים ורך'
       },
-      prices: { '200ml': 52, '500ml': 92, '1000ml': 152 },
-      image: 'kit-bottle-7.jpg',
+      description: {
+        en: "Jack Daniel's, apple juice, honey syrup, lemon and Angostura",
+        he: "ג'ק דניאלס, מיץ תפוחים, סירופ דבש, לימון ואנגוסטורה"
+      },
+      prices: { '200ml': 65, '500ml': 150, '1000ml': 240 },
+      image: 'kit-bottle-honey-bunny.jpg',
       available: true
     }
   ]

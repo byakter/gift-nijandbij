@@ -229,6 +229,8 @@
     art.appendChild(cardImage(product));
     var body = el('div', 'shop-card-body');
     body.appendChild(el('h3', 'shop-card-name')).appendChild(nameNode(product.name));
+    /* Optional short tagline (bottles); products without one look as before */
+    if (product.tagline) body.appendChild(el('p', 'shop-card-tagline', local(product.tagline)));
     body.appendChild(el('p', 'shop-card-desc', local(product.description)));
     art.appendChild(body);
     return { node: art, body: body };
@@ -277,7 +279,7 @@
   }
 
   function bottleCard(bottle, index) {
-    var c = card(bottle, index, 4);
+    var c = card(bottle, index, 2);
     var prices = bottle.prices || {};
     var sizes = SIZES.filter(function (s) { return prices[s] != null; });
     var price = priceLine(prices[sizes[0]]);
