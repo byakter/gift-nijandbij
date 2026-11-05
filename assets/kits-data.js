@@ -30,93 +30,117 @@ window.KITS_DATA = {
   /* ── Gift boxes (6) ──────────────────────────────────────────── */
   boxes: [
     {
-      id: 'box-1',
-      name: 'PLACEHOLDER Box 1',
+      id: 'aperol-spritz-diy',
+      name: 'Aperol Spritz DIY',
+      tagline: {
+        en: 'Bubbly and bright',
+        he: 'מבעבע ורענן'
+      },
       description: {
-        en: 'PLACEHOLDER: short description of the box.',
-        he: 'PLACEHOLDER: תיאור קצר של המארז.'
+        en: 'Everything you need to mix two Aperol Spritzes at home.',
+        he: 'כל מה שצריך כדי להכין בבית שני אפרול שפריץ.'
       },
       contents: {
-        en: ['PLACEHOLDER item 1', 'PLACEHOLDER item 2'],
-        he: ['PLACEHOLDER פריט 1', 'PLACEHOLDER פריט 2']
+        en: ['Aperol (100ml)', 'Prosecco or cava (200ml)', 'S.Pellegrino and an orange', '2 stemless wine glasses'],
+        he: ['אפרול (100 מ"ל)', 'פרוסקו או קאווה (200 מ"ל)', 'ס.פלגרינו ותפוז', '2 כוסות יין ללא רגל']
       },
-      price: 100,
-      image: 'kit-box-1.jpg',
+      price: 180,
+      image: 'kit-box-aperol-spritz-diy.jpg',
       available: true
     },
     {
-      id: 'box-2',
-      name: 'PLACEHOLDER Box 2',
+      id: 'las-uvas-diy',
+      name: 'Las Uvas DIY',
+      tagline: {
+        en: 'Fruity and tangy',
+        he: 'פירותי וחמצמץ'
+      },
       description: {
-        en: 'PLACEHOLDER: short description of the box.',
-        he: 'PLACEHOLDER: תיאור קצר של המארז.'
+        en: 'A vodka and grape cocktail to shake up for two, bar tools included.',
+        he: 'קוקטייל וודקה וענבים להכנה לשניים, כולל כלי בר.'
       },
       contents: {
-        en: ['PLACEHOLDER item 1', 'PLACEHOLDER item 2'],
-        he: ['PLACEHOLDER פריט 1', 'PLACEHOLDER פריט 2']
-      },
-      price: 150,
-      image: 'kit-box-2.jpg',
-      available: true
-    },
-    {
-      id: 'box-3',
-      name: 'PLACEHOLDER Box 3',
-      description: {
-        en: 'PLACEHOLDER: short description of the box.',
-        he: 'PLACEHOLDER: תיאור קצר של המארז.'
-      },
-      contents: {
-        en: ['PLACEHOLDER item 1', 'PLACEHOLDER item 2', 'PLACEHOLDER item 3'],
-        he: ['PLACEHOLDER פריט 1', 'PLACEHOLDER פריט 2', 'PLACEHOLDER פריט 3']
-      },
-      price: 200,
-      image: 'kit-box-3.jpg',
-      available: true
-    },
-    {
-      id: 'box-4',
-      name: 'PLACEHOLDER Box 4',
-      description: {
-        en: 'PLACEHOLDER: short description of the box.',
-        he: 'PLACEHOLDER: תיאור קצר של המארז.'
-      },
-      contents: {
-        en: ['PLACEHOLDER item 1', 'PLACEHOLDER item 2', 'PLACEHOLDER item 3'],
-        he: ['PLACEHOLDER פריט 1', 'PLACEHOLDER פריט 2', 'PLACEHOLDER פריט 3']
-      },
-      price: 250,
-      image: 'kit-box-4.jpg',
-      available: true
-    },
-    {
-      id: 'box-5',
-      name: 'PLACEHOLDER Box 5',
-      description: {
-        en: 'PLACEHOLDER: short description of the box.',
-        he: 'PLACEHOLDER: תיאור קצר של המארז.'
-      },
-      contents: {
-        en: ['PLACEHOLDER item 1', 'PLACEHOLDER item 2', 'PLACEHOLDER item 3', 'PLACEHOLDER item 4'],
-        he: ['PLACEHOLDER פריט 1', 'PLACEHOLDER פריט 2', 'PLACEHOLDER פריט 3', 'PLACEHOLDER פריט 4']
-      },
-      price: 300,
-      image: 'kit-box-5.jpg',
-      available: true
-    },
-    {
-      id: 'box-6',
-      name: 'PLACEHOLDER Box 6',
-      description: {
-        en: 'PLACEHOLDER: short description of the box.',
-        he: 'PLACEHOLDER: תיאור קצר של המארז.'
-      },
-      contents: {
-        en: ['PLACEHOLDER item 1', 'PLACEHOLDER item 2', 'PLACEHOLDER item 3', 'PLACEHOLDER item 4'],
-        he: ['PLACEHOLDER פריט 1', 'PLACEHOLDER פריט 2', 'PLACEHOLDER פריט 3', 'PLACEHOLDER פריט 4']
+        en: ['Grey Goose vodka (200ml)', 'Bitter lemon and sour mix (200ml)', 'A jar of grapes', 'Shaker and jigger', '2 highball glasses'],
+        he: ['וודקה גריי גוס (200 מ"ל)', 'ביטר למון וסאוור מיקס (200 מ"ל)', 'צנצנת ענבים', "שייקר וג'יגר", '2 כוסות הייבול']
       },
       price: 350,
-      image: 'kit-box-6.jpg',
+      image: 'kit-box-las-uvas-diy.jpg',
+      available: true
+    },
+    {
+      id: 'honey-bunny-diy',
+      name: 'Honey Bunny DIY',
+      tagline: {
+        en: 'Warm and smooth',
+        he: 'חמים ורך'
+      },
+      description: {
+        en: 'Our Honey Bunny, ready to shake at home for two, bar tools included.',
+        he: 'ה-Honey Bunny שלנו, להכנה בבית לשניים, כולל כלי בר.'
+      },
+      contents: {
+        en: ["Jack Daniel's (200ml)", 'Honey syrup (100ml) and apple juice', 'Lemon, apple and a bunch of thyme', 'Shaker and jigger', '2 glasses'],
+        he: ['ג\'ק דניאלס (200 מ"ל)', 'סירופ דבש (100 מ"ל) ומיץ תפוחים', 'לימון, תפוח וצרור טימין', "שייקר וג'יגר", '2 כוסות']
+      },
+      price: 350,
+      image: 'kit-box-honey-bunny-diy.jpg',
+      available: true
+    },
+    {
+      id: 'sangria-diy',
+      name: 'Sangria DIY',
+      tagline: {
+        en: 'Spiced and cosy',
+        he: 'מתובל ומחמם'
+      },
+      description: {
+        en: 'Everything you need to make sangria for two at home, plus a candle to set the mood.',
+        he: 'כל מה שצריך כדי להכין בבית סנגריה לשניים, ונר שמשלים את האווירה.'
+      },
+      contents: {
+        en: ['A bottle of red wine', 'Cointreau (100ml)', 'Apple, pear, orange and spices', '2 wine glasses', 'A candle'],
+        he: ['בקבוק יין אדום', 'קוואנטרו (100 מ"ל)', 'תפוח, אגס, תפוז ותבלינים', '2 כוסות יין', 'נר לאווירה']
+      },
+      price: 250,
+      image: 'kit-box-sangria-diy.jpg',
+      available: true
+    },
+    {
+      id: 'special-mix',
+      name: 'Special Mix',
+      tagline: {
+        en: 'Three cocktails, ready to pour',
+        he: 'שלושה קוקטיילים, מוכנים למזיגה'
+      },
+      description: {
+        en: 'Three of our bottled cocktails, with snacks and glasses for two.',
+        he: 'שלושה מהקוקטיילים שלנו בבקבוק, עם נשנושים וכוסות לשניים.'
+      },
+      contents: {
+        en: ['3 cocktail bottles (200ml each): Basil Smash, Flora, Honey Bunny', 'A jar of mixed nuts', 'A jar of gummy candies', '2 glasses'],
+        he: ['3 בקבוקי קוקטייל (200 מ"ל כל אחד): Basil Smash, Flora, Honey Bunny', 'צנצנת פיצוחים', 'צנצנת סוכריות גומי', '2 כוסות']
+      },
+      price: 250,
+      image: 'kit-box-special-mix.jpg',
+      available: true
+    },
+    {
+      id: 'cocktail-succulent',
+      name: 'Cocktail & Succulent',
+      tagline: {
+        en: 'A gift that lasts',
+        he: 'מתנה שנשארת'
+      },
+      description: {
+        en: 'A bottled cocktail for two, with a succulent that stays long after the last sip.',
+        he: 'קוקטייל בבקבוק לשניים, עם סוקולנט שנשאר הרבה אחרי הלגימה האחרונה.'
+      },
+      contents: {
+        en: ['Cocktail bottle (500ml), flavour of your choice', 'A jar of mixed nuts', 'A succulent', '2 cocktail glasses'],
+        he: ['בקבוק קוקטייל (500 מ"ל) בטעם לבחירתך', 'צנצנת פיצוחים', 'סוקולנט', '2 כוסות קוקטייל']
+      },
+      price: 230,
+      image: 'kit-box-cocktail-succulent.jpg',
       available: true
     }
   ],
