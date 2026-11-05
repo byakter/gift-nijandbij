@@ -1,7 +1,6 @@
 /* kits-data.js — Product data for the Kits page (kits.html and he/kits.html read this one file).
 
    HOW TO EDIT
-   - Every value marked PLACEHOLDER is a stand-in. Replace it with the real text, price or file name.
    - Prices are whole shekels (ILS) and include VAT. Write numbers only, no ₪ sign: 149, not "149₪".
    - tagline (optional, bottles) is a short line shown under the name, with "en" and "he"
      versions; description then holds the ingredients. Leave tagline out to show no line.
