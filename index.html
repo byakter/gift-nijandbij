@@ -337,6 +337,16 @@
       .services-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     }
 
+    /* Four hero buttons as a 2 x 2 grid where one row no longer fits (no single orphan button).
+       Written as the exact complement of the 640px rule below: with display scaling the viewport
+       can be fractional (e.g. 640.8px), which matches neither max-width: 640px nor min-width: 641px. */
+    @media not all and (max-width: 640px) {
+      @media (max-width: 860px) {
+        .hero-home-ctas { display: grid; grid-template-columns: repeat(2, minmax(0, 240px)); justify-content: center; }
+        .hero-home-ctas .btn { justify-content: center; }
+      }
+    }
+
     @media (max-width: 640px) {
       .hero-home-ctas { flex-direction: column; align-items: center; }
       .hero-home-ctas .btn { width: 100%; justify-content: center; max-width: 320px; }
@@ -452,6 +462,7 @@
             </a>
             <a href="/bar" class="btn btn-ghost btn-lg">Bar Services</a>
             <a href="/workshops" class="btn btn-ghost btn-lg">Workshops</a>
+            <a href="/kits" class="btn btn-ghost btn-lg">Kits</a>
           </div>
         </div>
       </div>
