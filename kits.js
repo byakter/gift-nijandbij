@@ -19,6 +19,7 @@
       outOfStock: 'Out of stock',
       size:       'Size',
       sizes:      { '200ml': '200ml', '500ml': '500ml', '1000ml': '1000ml' },
+      flavour:    'Flavour',
 
       /* Order form */
       itemsTitle:     'Your items',
@@ -81,6 +82,7 @@
       addToOrder: 'הוסיפו להזמנה',
       outOfStock: 'אזל מהמלאי',
       size:       'גודל',
+      flavour:    'טעם',
       sizes:      { '200ml': '200\u00A0מ״ל', '500ml': '500\u00A0מ״ל', '1000ml': '1000\u00A0מ״ל' },  /* no-break space */
 
       /* Order form */
@@ -170,6 +172,24 @@
     return node;
   }
 
+  /* Optional "flavours" on a gift box: the bottles it lets you choose from, in-stock ones only,
+     in the listed order. A box whose flavours are all unavailable shows as out of stock. */
+  var bottleById = {}, warned = {};
+  (data.bottles || []).forEach(function (b) { bottleById[b.id] = b; });
+  function flavourChoices(box) {
+    return (box.flavours || []).filter(function (id) {
+      if (!bottleById[id]) {
+        if (window.console && !warned[box.id + id]) console.warn('kits-data.js: unknown flavour "' + id + '" on ' + box.id);
+        warned[box.id + id] = true;
+        return false;
+      }
+      return bottleById[id].available !== false;
+    }).map(function (id) { return bottleById[id]; });
+  }
+  (data.boxes || []).forEach(function (box) {
+    if (box.flavours && !flavourChoices(box).length) box.available = false;
+  });
+
   var PLACEHOLDER_ICON =
     '<svg viewBox="0 0 24 24" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
       '<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/>' +
@@ -247,7 +267,27 @@
       c.body.appendChild(list);
     }
     c.body.appendChild(priceLine(box.price));
-    c.body.appendChild(addButton('box', box));
+    var btn = c.body.appendChild(addButton('box', box));
+    /* Flavour dropdown (label and select on one line); the button adds "<box id>~<bottle id>" */
+    var flavours = flavourChoices(box);
+    if (box.flavours && flavours.length) {
+      var wrap = el('div', 'form-group shop-flavour');
+      var select = el('select');
+      select.id = 'flavour-' + box.id;
+      select.disabled = box.available === false;
+      flavours.forEach(function (b) {
+        var opt = el('option', null, nameText(b.name));
+        opt.value = b.id;
+        select.appendChild(opt);
+      });
+      var label = el('label', null, t.flavour);
+      label.htmlFor = select.id;
+      wrap.appendChild(label);
+      wrap.appendChild(select);
+      c.body.insertBefore(wrap, c.body.querySelector('.shop-card-price'));
+      btn.setAttribute('data-id', box.id + '~' + select.value);
+      select.addEventListener('change', function () { btn.setAttribute('data-id', box.id + '~' + select.value); });
+    }
     return c.node;
   }
 
@@ -306,8 +346,15 @@
 
   /* Products by key ("box:<id>" or "bottle:<id>"). Prices are always read from here, never from the form. */
   var catalog = {};
-  (data.boxes || []).forEach(function (p) { catalog['box:' + p.id] = { kind: 'box', product: p }; });
+  (data.boxes || []).forEach(function (p) {
+    if (!p.flavours) { catalog['box:' + p.id] = { kind: 'box', product: p }; return; }
+    /* A box with flavours: one product per flavour ("box:<id>~<bottle id>"), named "Box (Bottle)" */
+    flavourChoices(p).forEach(function (b) {
+      catalog['box:' + p.id + '~' + b.id] = { kind: 'box', product: p, name: p.name + ' (' + b.name + ')' };
+    });
+  });
   (data.bottles || []).forEach(function (p) { catalog['bottle:' + p.id] = { kind: 'bottle', product: p }; });
+  function productName(key) { return catalog[key].name || catalog[key].product.name; }
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -327,8 +374,8 @@
   function itemLabel(key, size, html) {
     var c = catalog[key];
     var sizeText = c.kind === 'bottle' ? ' · ' + (t.sizes[size] || size) : '';
-    return html ? '<bdi dir="ltr">' + esc(c.product.name) + '</bdi>' + esc(sizeText)
-                : nameText(c.product.name) + sizeText;
+    return html ? '<bdi dir="ltr">' + esc(productName(key)) + '</bdi>' + esc(sizeText)
+                : nameText(productName(key)) + sizeText;
   }
 
   var REQUIRED = ' <span aria-hidden="true">*</span>';
@@ -425,16 +472,19 @@
   form.addEventListener('submit', function (e) { e.preventDefault(); });
 
   /* ── Item rows ── */
-  /* Product list: in-stock products only, grouped, names in English */
-  function optionGroup(label, kind, products) {
-    var opts = products.filter(function (p) { return p.available !== false; }).map(function (p) {
-      return '<option value="' + kind + ':' + esc(p.id) + '">' + esc(nameText(p.name)) + '</option>';
+  /* Product list: in-stock products only, grouped, names in English (a box with flavours is listed
+     once per flavour) */
+  function optionGroup(label, kind) {
+    var opts = Object.keys(catalog).filter(function (key) {
+      return catalog[key].kind === kind && catalog[key].product.available !== false;
+    }).map(function (key) {
+      return '<option value="' + esc(key) + '">' + esc(nameText(productName(key))) + '</option>';
     }).join('');
     return opts ? '<optgroup label="' + esc(label) + '">' + opts + '</optgroup>' : '';
   }
   var PRODUCT_OPTIONS = '<option value="">' + esc(t.chooseProduct) + '</option>' +
-    optionGroup(t.groupBoxes, 'box', data.boxes || []) +
-    optionGroup(t.groupBottles, 'bottle', data.bottles || []);
+    optionGroup(t.groupBoxes, 'box') +
+    optionGroup(t.groupBottles, 'bottle');
   var SIZE_OPTIONS = SIZES.map(function (s) {
     return '<option value="' + s + '">' + esc(t.sizes[s] || s) + '</option>';
   }).join('');
@@ -605,7 +655,7 @@
       var size = rowSize(row), qty = rowQty(row);
       var amount = unitPrice(key, size) * qty;
       subtotal += amount;
-      items.push({ key: key, name: catalog[key].product.name, size: size, qty: qty, amount: amount });
+      items.push({ key: key, name: productName(key), size: size, qty: qty, amount: amount });
     });
     var delivery = deliveryValue();
     var shipping = delivery === 'shipping' ? data.shipping : 0;

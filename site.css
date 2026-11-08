@@ -1191,6 +1191,22 @@ ul  { list-style: none; }
   font-size: 0.6rem;
 }
 
+/* Optional flavour dropdown on a gift box card: label and select on one line, 44px tap target */
+.shop-flavour {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.shop-flavour label { flex: none; }
+.shop-flavour select {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .shop-card-price {
   display: flex;
   align-items: baseline;
@@ -1457,7 +1473,8 @@ ul  { list-style: none; }
   transition: border-color 0.25s, color 0.25s, background 0.25s;
 }
 /* RTL: dropdown arrow on the left, where the field ends */
-[dir="rtl"] .order-item select {
+[dir="rtl"] .order-item select,
+[dir="rtl"] .shop-flavour select {
   background-position: left 14px center;
   padding-right: 16px;
   padding-left: 40px;

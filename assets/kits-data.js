@@ -2,6 +2,9 @@
 
    HOW TO EDIT
    - Prices are whole shekels (ILS) and include VAT. Write numbers only, no ₪ sign: 149, not "149₪".
+   - flavours (optional, gift boxes) is a list of bottle ids, e.g. ['basil-smash', 'flora']. It adds a
+     flavour dropdown to the box card, in this order, with the bottle names. Bottles marked
+     available: false are left out; if none are left, the box shows as out of stock.
    - tagline (optional, bottles) is a short line shown under the name, with "en" and "he"
      versions; description then holds the ingredients. Leave tagline out to show no line.
    - name stays in English on both language versions. description and contents have an
@@ -139,6 +142,7 @@ window.KITS_DATA = {
         he: ['בקבוק קוקטייל (500 מ"ל) בטעם לבחירתך', 'צנצנת פיצוחים', 'סוקולנט', '2 כוסות קוקטייל']
       },
       price: 230,
+      flavours: ['basil-smash', 'flora', 'jasmine', 'negroni', 'honey-bunny'],
       image: 'kit-box-cocktail-succulent.jpg',
       available: true
     }
