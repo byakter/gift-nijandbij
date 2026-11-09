@@ -2,3 +2,5 @@
 .gitignore
 wrangler.jsonc
 .claude
+DESIGN.md
+CLAUDE.md
